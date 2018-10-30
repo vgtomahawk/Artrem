@@ -1,3 +1,4 @@
+UDA_VISIBLE_DEVICES="" python -u train_nli.py --word_emb_path dataset/GloVe/glove.840B.300d.txt --enc_lstm_dim=256 --optimizer=adam | tee baselineLogFullPrecisionAdam
 
 togrep : ['--word_emb_path', 'dataset/GloVe/glove.840B.300d.txt', '--enc_lstm_dim=256', '--optimizer=adam']
 
@@ -8,366 +9,369 @@ Namespace(batch_size=128, decay=0.99, dpout_fc=0.0, dpout_model=0.0, enc_lstm_di
 Found 38957(/43479) words with glove vectors
 Vocab size : 38957
 NLINet(
-  (encoder): InferSent(
-    (enc_lstm): LSTM(300, 256, bidirectional=True)
-  )
-  (classifier): Sequential(
-    (0): Linear(in_features=2048, out_features=512, bias=True)
-    (1): Linear(in_features=512, out_features=512, bias=True)
-    (2): Linear(in_features=512, out_features=3, bias=True)
-  )
-)
+(encoder): InferSent(
+  (enc_lstm): LSTM(300, 256, bidirectional=True)
+    )
+      (classifier): Sequential(
+          (0): Linear(in_features=2048, out_features=512, bias=True)
+              (1): Linear(in_features=512, out_features=512, bias=True)
+                  (2): Linear(in_features=512, out_features=3, bias=True)
+                    )
+                    )
 
-TRAINING : Epoch 1
-Learning rate : 0.001
-12672 ; loss 0.9 ; sentence/s 152 ; words/s 9709 ; accuracy train : 55.8672
-25472 ; loss 0.72 ; sentence/s 149 ; words/s 9728 ; accuracy train : 62.4648
-38272 ; loss 0.66 ; sentence/s 158 ; words/s 10204 ; accuracy train : 65.8151
-51072 ; loss 0.66 ; sentence/s 157 ; words/s 10240 ; accuracy train : 67.5801
-63872 ; loss 0.63 ; sentence/s 160 ; words/s 10128 ; accuracy train : 68.9047
-76672 ; loss 0.61 ; sentence/s 162 ; words/s 10081 ; accuracy train : 69.9688
-89472 ; loss 0.61 ; sentence/s 160 ; words/s 10227 ; accuracy train : 70.8337
-102272 ; loss 0.59 ; sentence/s 157 ; words/s 10390 ; accuracy train : 71.4561
-115072 ; loss 0.58 ; sentence/s 158 ; words/s 10216 ; accuracy train : 72.0286
-127872 ; loss 0.59 ; sentence/s 160 ; words/s 10167 ; accuracy train : 72.4625
-140672 ; loss 0.58 ; sentence/s 160 ; words/s 10308 ; accuracy train : 72.8423
-153472 ; loss 0.58 ; sentence/s 163 ; words/s 10152 ; accuracy train : 73.1882
-166272 ; loss 0.56 ; sentence/s 161 ; words/s 10231 ; accuracy train : 73.5469
-179072 ; loss 0.56 ; sentence/s 161 ; words/s 10191 ; accuracy train : 73.8198
-191872 ; loss 0.55 ; sentence/s 160 ; words/s 10321 ; accuracy train : 74.1156
-204672 ; loss 0.56 ; sentence/s 158 ; words/s 10329 ; accuracy train : 74.3452
-217472 ; loss 0.56 ; sentence/s 159 ; words/s 10241 ; accuracy train : 74.5492
-230272 ; loss 0.55 ; sentence/s 157 ; words/s 10379 ; accuracy train : 74.7669
-243072 ; loss 0.55 ; sentence/s 160 ; words/s 10252 ; accuracy train : 74.9650
-255872 ; loss 0.55 ; sentence/s 161 ; words/s 10260 ; accuracy train : 75.1195
-268672 ; loss 0.55 ; sentence/s 158 ; words/s 10259 ; accuracy train : 75.2742
-281472 ; loss 0.53 ; sentence/s 158 ; words/s 10454 ; accuracy train : 75.4545
-294272 ; loss 0.55 ; sentence/s 158 ; words/s 10370 ; accuracy train : 75.5975
-307072 ; loss 0.54 ; sentence/s 158 ; words/s 10234 ; accuracy train : 75.7253
-319872 ; loss 0.53 ; sentence/s 159 ; words/s 10217 ; accuracy train : 75.8534
-332672 ; loss 0.53 ; sentence/s 161 ; words/s 10265 ; accuracy train : 75.9949
-345472 ; loss 0.53 ; sentence/s 157 ; words/s 10378 ; accuracy train : 76.1212
-358272 ; loss 0.52 ; sentence/s 161 ; words/s 10227 ; accuracy train : 76.2266
-371072 ; loss 0.53 ; sentence/s 160 ; words/s 10333 ; accuracy train : 76.3217
-383872 ; loss 0.52 ; sentence/s 162 ; words/s 10177 ; accuracy train : 76.4208
-396672 ; loss 0.52 ; sentence/s 162 ; words/s 10127 ; accuracy train : 76.5219
-409472 ; loss 0.52 ; sentence/s 158 ; words/s 10225 ; accuracy train : 76.6077
-422272 ; loss 0.52 ; sentence/s 157 ; words/s 10223 ; accuracy train : 76.6948
-435072 ; loss 0.52 ; sentence/s 157 ; words/s 10251 ; accuracy train : 76.7812
-447872 ; loss 0.53 ; sentence/s 158 ; words/s 10313 ; accuracy train : 76.8554
-460672 ; loss 0.52 ; sentence/s 159 ; words/s 10262 ; accuracy train : 76.9327
-473472 ; loss 0.52 ; sentence/s 161 ; words/s 10173 ; accuracy train : 77.0027
-486272 ; loss 0.5 ; sentence/s 161 ; words/s 10101 ; accuracy train : 77.0970
-499072 ; loss 0.5 ; sentence/s 160 ; words/s 10188 ; accuracy train : 77.1873
-511872 ; loss 0.51 ; sentence/s 158 ; words/s 10292 ; accuracy train : 77.2596
-524672 ; loss 0.52 ; sentence/s 154 ; words/s 9822 ; accuracy train : 77.3186
-537472 ; loss 0.51 ; sentence/s 157 ; words/s 10010 ; accuracy train : 77.3774
-results : epoch 1 ; mean accuracy train : 77.0
+                    TRAINING : Epoch 1
+                    Learning rate : 0.001
+                    train_nli.py:185: UserWarning: invalid index of a 0-dim tensor. This will be an error in PyTorch 0.5. Use tensor.item() to convert a 0-dim tensor to a Python number
+                      all_costs.append(loss.data[0])
+                      12672 ; loss 0.9 ; sentence/s 152 ; words/s 9709 ; accuracy train : 55.8672
+                      25472 ; loss 0.72 ; sentence/s 149 ; words/s 9728 ; accuracy train : 62.4648
+                      38272 ; loss 0.66 ; sentence/s 158 ; words/s 10204 ; accuracy train : 65.8151
+                      51072 ; loss 0.66 ; sentence/s 157 ; words/s 10240 ; accuracy train : 67.5801
+                      63872 ; loss 0.63 ; sentence/s 160 ; words/s 10128 ; accuracy train : 68.9047
+                      76672 ; loss 0.61 ; sentence/s 162 ; words/s 10081 ; accuracy train : 69.9688
+                      89472 ; loss 0.61 ; sentence/s 160 ; words/s 10227 ; accuracy train : 70.8337
+                      102272 ; loss 0.59 ; sentence/s 157 ; words/s 10390 ; accuracy train : 71.4561
+                      115072 ; loss 0.58 ; sentence/s 158 ; words/s 10216 ; accuracy train : 72.0286
+                      127872 ; loss 0.59 ; sentence/s 160 ; words/s 10167 ; accuracy train : 72.4625
+                      140672 ; loss 0.58 ; sentence/s 160 ; words/s 10308 ; accuracy train : 72.8423
+                      153472 ; loss 0.58 ; sentence/s 163 ; words/s 10152 ; accuracy train : 73.1882
+                      166272 ; loss 0.56 ; sentence/s 161 ; words/s 10231 ; accuracy train : 73.5469
+                      179072 ; loss 0.56 ; sentence/s 161 ; words/s 10191 ; accuracy train : 73.8198
+                      191872 ; loss 0.55 ; sentence/s 160 ; words/s 10321 ; accuracy train : 74.1156
+                      204672 ; loss 0.56 ; sentence/s 158 ; words/s 10329 ; accuracy train : 74.3452
+                      217472 ; loss 0.56 ; sentence/s 159 ; words/s 10241 ; accuracy train : 74.5492
+                      230272 ; loss 0.55 ; sentence/s 157 ; words/s 10379 ; accuracy train : 74.7669
+                      243072 ; loss 0.55 ; sentence/s 160 ; words/s 10252 ; accuracy train : 74.9650
+                      255872 ; loss 0.55 ; sentence/s 161 ; words/s 10260 ; accuracy train : 75.1195
+                      268672 ; loss 0.55 ; sentence/s 158 ; words/s 10259 ; accuracy train : 75.2742
+                      281472 ; loss 0.53 ; sentence/s 158 ; words/s 10454 ; accuracy train : 75.4545
+                      294272 ; loss 0.55 ; sentence/s 158 ; words/s 10370 ; accuracy train : 75.5975
+                      307072 ; loss 0.54 ; sentence/s 158 ; words/s 10234 ; accuracy train : 75.7253
+                      319872 ; loss 0.53 ; sentence/s 159 ; words/s 10217 ; accuracy train : 75.8534
+                      332672 ; loss 0.53 ; sentence/s 161 ; words/s 10265 ; accuracy train : 75.9949
+                      345472 ; loss 0.53 ; sentence/s 157 ; words/s 10378 ; accuracy train : 76.1212
+                      358272 ; loss 0.52 ; sentence/s 161 ; words/s 10227 ; accuracy train : 76.2266
+                      371072 ; loss 0.53 ; sentence/s 160 ; words/s 10333 ; accuracy train : 76.3217
+                      383872 ; loss 0.52 ; sentence/s 162 ; words/s 10177 ; accuracy train : 76.4208
+                      396672 ; loss 0.52 ; sentence/s 162 ; words/s 10127 ; accuracy train : 76.5219
+                      409472 ; loss 0.52 ; sentence/s 158 ; words/s 10225 ; accuracy train : 76.6077
+                      422272 ; loss 0.52 ; sentence/s 157 ; words/s 10223 ; accuracy train : 76.6948
+                      435072 ; loss 0.52 ; sentence/s 157 ; words/s 10251 ; accuracy train : 76.7812
+                      447872 ; loss 0.53 ; sentence/s 158 ; words/s 10313 ; accuracy train : 76.8554
+                      460672 ; loss 0.52 ; sentence/s 159 ; words/s 10262 ; accuracy train : 76.9327
+                      473472 ; loss 0.52 ; sentence/s 161 ; words/s 10173 ; accuracy train : 77.0027
+                      486272 ; loss 0.5 ; sentence/s 161 ; words/s 10101 ; accuracy train : 77.0970
+                      499072 ; loss 0.5 ; sentence/s 160 ; words/s 10188 ; accuracy train : 77.1873
+                      511872 ; loss 0.51 ; sentence/s 158 ; words/s 10292 ; accuracy train : 77.2596
+                      524672 ; loss 0.52 ; sentence/s 154 ; words/s 9822 ; accuracy train : 77.3186
+                      537472 ; loss 0.51 ; sentence/s 157 ; words/s 10010 ; accuracy train : 77.3774
+                      results : epoch 1 ; mean accuracy train : 77.0
 
-VALIDATION : Epoch 1
-togrep : results : epoch 1 ; mean accuracy valid :              81.6297500508
-saving model at epoch 1
+                      VALIDATION : Epoch 1
+                      togrep : results : epoch 1 ; mean accuracy valid :              81.6297500508
+                      saving model at epoch 1
 
-TRAINING : Epoch 2
-Learning rate : 0.001
-12672 ; loss 0.47 ; sentence/s 158 ; words/s 10279 ; accuracy train : 81.7734
-25472 ; loss 0.47 ; sentence/s 157 ; words/s 10025 ; accuracy train : 81.7070
-38272 ; loss 0.48 ; sentence/s 149 ; words/s 9719 ; accuracy train : 81.6406
-51072 ; loss 0.48 ; sentence/s 159 ; words/s 10268 ; accuracy train : 81.6660
-63872 ; loss 0.47 ; sentence/s 159 ; words/s 10289 ; accuracy train : 81.6516
-76672 ; loss 0.48 ; sentence/s 159 ; words/s 10277 ; accuracy train : 81.6484
-89472 ; loss 0.46 ; sentence/s 160 ; words/s 10202 ; accuracy train : 81.7132
-102272 ; loss 0.48 ; sentence/s 158 ; words/s 10286 ; accuracy train : 81.7012
-115072 ; loss 0.47 ; sentence/s 160 ; words/s 10273 ; accuracy train : 81.6892
-127872 ; loss 0.47 ; sentence/s 162 ; words/s 10121 ; accuracy train : 81.7047
-140672 ; loss 0.48 ; sentence/s 159 ; words/s 10181 ; accuracy train : 81.6491
-153472 ; loss 0.47 ; sentence/s 161 ; words/s 10111 ; accuracy train : 81.6289
-166272 ; loss 0.47 ; sentence/s 158 ; words/s 10356 ; accuracy train : 81.6677
-179072 ; loss 0.47 ; sentence/s 158 ; words/s 10216 ; accuracy train : 81.6936
-191872 ; loss 0.48 ; sentence/s 158 ; words/s 10307 ; accuracy train : 81.6578
-204672 ; loss 0.47 ; sentence/s 157 ; words/s 10332 ; accuracy train : 81.6836
-217472 ; loss 0.47 ; sentence/s 159 ; words/s 10267 ; accuracy train : 81.7027
-230272 ; loss 0.49 ; sentence/s 163 ; words/s 10130 ; accuracy train : 81.6554
-243072 ; loss 0.47 ; sentence/s 163 ; words/s 10142 ; accuracy train : 81.6743
-255872 ; loss 0.47 ; sentence/s 157 ; words/s 10432 ; accuracy train : 81.7020
-268672 ; loss 0.48 ; sentence/s 160 ; words/s 10238 ; accuracy train : 81.6875
-281472 ; loss 0.47 ; sentence/s 159 ; words/s 10229 ; accuracy train : 81.6886
-294272 ; loss 0.47 ; sentence/s 158 ; words/s 10291 ; accuracy train : 81.6916
-307072 ; loss 0.47 ; sentence/s 160 ; words/s 10277 ; accuracy train : 81.7044
-319872 ; loss 0.48 ; sentence/s 160 ; words/s 10165 ; accuracy train : 81.7006
-332672 ; loss 0.47 ; sentence/s 160 ; words/s 10275 ; accuracy train : 81.7236
-345472 ; loss 0.46 ; sentence/s 161 ; words/s 10277 ; accuracy train : 81.7399
-358272 ; loss 0.47 ; sentence/s 161 ; words/s 10235 ; accuracy train : 81.7447
-371072 ; loss 0.47 ; sentence/s 163 ; words/s 10189 ; accuracy train : 81.7562
-383872 ; loss 0.48 ; sentence/s 161 ; words/s 10282 ; accuracy train : 81.7557
-396672 ; loss 0.47 ; sentence/s 158 ; words/s 10332 ; accuracy train : 81.7664
-409472 ; loss 0.48 ; sentence/s 159 ; words/s 10284 ; accuracy train : 81.7664
-422272 ; loss 0.46 ; sentence/s 158 ; words/s 10365 ; accuracy train : 81.7775
-435072 ; loss 0.47 ; sentence/s 161 ; words/s 10235 ; accuracy train : 81.7778
-447872 ; loss 0.46 ; sentence/s 160 ; words/s 10284 ; accuracy train : 81.8016
-460672 ; loss 0.46 ; sentence/s 159 ; words/s 10252 ; accuracy train : 81.8142
-473472 ; loss 0.48 ; sentence/s 160 ; words/s 10263 ; accuracy train : 81.8100
-486272 ; loss 0.46 ; sentence/s 159 ; words/s 10350 ; accuracy train : 81.8135
-499072 ; loss 0.46 ; sentence/s 162 ; words/s 10299 ; accuracy train : 81.8291
-511872 ; loss 0.47 ; sentence/s 158 ; words/s 10333 ; accuracy train : 81.8357
-524672 ; loss 0.46 ; sentence/s 161 ; words/s 10137 ; accuracy train : 81.8447
-537472 ; loss 0.46 ; sentence/s 161 ; words/s 10240 ; accuracy train : 81.8633
-results : epoch 2 ; mean accuracy train : 81.0
+                      TRAINING : Epoch 2
+                      Learning rate : 0.001
+                      12672 ; loss 0.47 ; sentence/s 158 ; words/s 10279 ; accuracy train : 81.7734
+                      25472 ; loss 0.47 ; sentence/s 157 ; words/s 10025 ; accuracy train : 81.7070
+                      38272 ; loss 0.48 ; sentence/s 149 ; words/s 9719 ; accuracy train : 81.6406
+                      51072 ; loss 0.48 ; sentence/s 159 ; words/s 10268 ; accuracy train : 81.6660
+                      63872 ; loss 0.47 ; sentence/s 159 ; words/s 10289 ; accuracy train : 81.6516
+                          76672 ; loss 0.48 ; sentence/s 159 ; words/s 10277 ; accuracy train : 81.6484
+                          89472 ; loss 0.46 ; sentence/s 160 ; words/s 10202 ; accuracy train : 81.7132
+                          102272 ; loss 0.48 ; sentence/s 158 ; words/s 10286 ; accuracy train : 81.7012
+                          115072 ; loss 0.47 ; sentence/s 160 ; words/s 10273 ; accuracy train : 81.6892
+                          127872 ; loss 0.47 ; sentence/s 162 ; words/s 10121 ; accuracy train : 81.7047
+                          140672 ; loss 0.48 ; sentence/s 159 ; words/s 10181 ; accuracy train : 81.6491
+                          153472 ; loss 0.47 ; sentence/s 161 ; words/s 10111 ; accuracy train : 81.6289
+                          166272 ; loss 0.47 ; sentence/s 158 ; words/s 10356 ; accuracy train : 81.6677
+                          179072 ; loss 0.47 ; sentence/s 158 ; words/s 10216 ; accuracy train : 81.6936
+                          191872 ; loss 0.48 ; sentence/s 158 ; words/s 10307 ; accuracy train : 81.6578
+                          204672 ; loss 0.47 ; sentence/s 157 ; words/s 10332 ; accuracy train : 81.6836
+                          217472 ; loss 0.47 ; sentence/s 159 ; words/s 10267 ; accuracy train : 81.7027
+                          230272 ; loss 0.49 ; sentence/s 163 ; words/s 10130 ; accuracy train : 81.6554
+                          243072 ; loss 0.47 ; sentence/s 163 ; words/s 10142 ; accuracy train : 81.6743
+                          255872 ; loss 0.47 ; sentence/s 157 ; words/s 10432 ; accuracy train : 81.7020
+                          268672 ; loss 0.48 ; sentence/s 160 ; words/s 10238 ; accuracy train : 81.6875
+                          281472 ; loss 0.47 ; sentence/s 159 ; words/s 10229 ; accuracy train : 81.6886
+                          294272 ; loss 0.47 ; sentence/s 158 ; words/s 10291 ; accuracy train : 81.6916
+                          307072 ; loss 0.47 ; sentence/s 160 ; words/s 10277 ; accuracy train : 81.7044
+                          319872 ; loss 0.48 ; sentence/s 160 ; words/s 10165 ; accuracy train : 81.7006
+                          332672 ; loss 0.47 ; sentence/s 160 ; words/s 10275 ; accuracy train : 81.7236
+                          345472 ; loss 0.46 ; sentence/s 161 ; words/s 10277 ; accuracy train : 81.7399
+                          358272 ; loss 0.47 ; sentence/s 161 ; words/s 10235 ; accuracy train : 81.7447
+                          371072 ; loss 0.47 ; sentence/s 163 ; words/s 10189 ; accuracy train : 81.7562
+                          383872 ; loss 0.48 ; sentence/s 161 ; words/s 10282 ; accuracy train : 81.7557
+                          396672 ; loss 0.47 ; sentence/s 158 ; words/s 10332 ; accuracy train : 81.7664
+                          409472 ; loss 0.48 ; sentence/s 159 ; words/s 10284 ; accuracy train : 81.7664
+                          422272 ; loss 0.46 ; sentence/s 158 ; words/s 10365 ; accuracy train : 81.7775
+                          435072 ; loss 0.47 ; sentence/s 161 ; words/s 10235 ; accuracy train : 81.7778
+                          447872 ; loss 0.46 ; sentence/s 160 ; words/s 10284 ; accuracy train : 81.8016
+                          460672 ; loss 0.46 ; sentence/s 159 ; words/s 10252 ; accuracy train : 81.8142
+                          473472 ; loss 0.48 ; sentence/s 160 ; words/s 10263 ; accuracy train : 81.8100
+                          486272 ; loss 0.46 ; sentence/s 159 ; words/s 10350 ; accuracy train : 81.8135
+                          499072 ; loss 0.46 ; sentence/s 162 ; words/s 10299 ; accuracy train : 81.8291
+                          511872 ; loss 0.47 ; sentence/s 158 ; words/s 10333 ; accuracy train : 81.8357
+                          524672 ; loss 0.46 ; sentence/s 161 ; words/s 10137 ; accuracy train : 81.8447
+                          537472 ; loss 0.46 ; sentence/s 161 ; words/s 10240 ; accuracy train : 81.8633
+                          results : epoch 2 ; mean accuracy train : 81.0
 
-VALIDATION : Epoch 2
-togrep : results : epoch 2 ; mean accuracy valid :              83.0827067669
-saving model at epoch 2
+                          VALIDATION : Epoch 2
+                          togrep : results : epoch 2 ; mean accuracy valid :              83.0827067669
+                          saving model at epoch 2
 
-TRAINING : Epoch 3
-Learning rate : 0.001
-12672 ; loss 0.41 ; sentence/s 159 ; words/s 10280 ; accuracy train : 84.5547
-25472 ; loss 0.41 ; sentence/s 160 ; words/s 10274 ; accuracy train : 84.6211
-38272 ; loss 0.41 ; sentence/s 162 ; words/s 10134 ; accuracy train : 84.5365
-51072 ; loss 0.43 ; sentence/s 161 ; words/s 10235 ; accuracy train : 84.3086
-63872 ; loss 0.43 ; sentence/s 158 ; words/s 10394 ; accuracy train : 84.1375
-76672 ; loss 0.43 ; sentence/s 161 ; words/s 10249 ; accuracy train : 83.9388
-89472 ; loss 0.41 ; sentence/s 160 ; words/s 10306 ; accuracy train : 84.0011
-102272 ; loss 0.43 ; sentence/s 160 ; words/s 10317 ; accuracy train : 83.9883
-115072 ; loss 0.43 ; sentence/s 158 ; words/s 10202 ; accuracy train : 83.9714
-127872 ; loss 0.42 ; sentence/s 159 ; words/s 10230 ; accuracy train : 83.9578
-140672 ; loss 0.44 ; sentence/s 160 ; words/s 10260 ; accuracy train : 83.8849
-153472 ; loss 0.44 ; sentence/s 161 ; words/s 10213 ; accuracy train : 83.7930
-166272 ; loss 0.42 ; sentence/s 158 ; words/s 10308 ; accuracy train : 83.8173
-179072 ; loss 0.43 ; sentence/s 160 ; words/s 10254 ; accuracy train : 83.7974
-191872 ; loss 0.44 ; sentence/s 160 ; words/s 10240 ; accuracy train : 83.7589
-204672 ; loss 0.42 ; sentence/s 159 ; words/s 10276 ; accuracy train : 83.7427
-217472 ; loss 0.43 ; sentence/s 159 ; words/s 10285 ; accuracy train : 83.6967
-230272 ; loss 0.43 ; sentence/s 160 ; words/s 10297 ; accuracy train : 83.7031
-243072 ; loss 0.42 ; sentence/s 161 ; words/s 10207 ; accuracy train : 83.7068
-255872 ; loss 0.43 ; sentence/s 160 ; words/s 10209 ; accuracy train : 83.7027
-268672 ; loss 0.43 ; sentence/s 158 ; words/s 10303 ; accuracy train : 83.7042
-281472 ; loss 0.42 ; sentence/s 161 ; words/s 10246 ; accuracy train : 83.7081
-294272 ; loss 0.44 ; sentence/s 157 ; words/s 10325 ; accuracy train : 83.6807
-307072 ; loss 0.44 ; sentence/s 158 ; words/s 10379 ; accuracy train : 83.6654
-319872 ; loss 0.43 ; sentence/s 160 ; words/s 10240 ; accuracy train : 83.6578
-332672 ; loss 0.43 ; sentence/s 161 ; words/s 10243 ; accuracy train : 83.6340
-345472 ; loss 0.43 ; sentence/s 160 ; words/s 10280 ; accuracy train : 83.6360
-358272 ; loss 0.43 ; sentence/s 158 ; words/s 10247 ; accuracy train : 83.6454
-371072 ; loss 0.42 ; sentence/s 163 ; words/s 10174 ; accuracy train : 83.6527
-383872 ; loss 0.43 ; sentence/s 159 ; words/s 10349 ; accuracy train : 83.6589
-396672 ; loss 0.43 ; sentence/s 158 ; words/s 10334 ; accuracy train : 83.6600
-409472 ; loss 0.43 ; sentence/s 158 ; words/s 10406 ; accuracy train : 83.6663
-422272 ; loss 0.43 ; sentence/s 159 ; words/s 10273 ; accuracy train : 83.6565
-435072 ; loss 0.44 ; sentence/s 160 ; words/s 10221 ; accuracy train : 83.6406
-447872 ; loss 0.44 ; sentence/s 160 ; words/s 10251 ; accuracy train : 83.6420
-460672 ; loss 0.43 ; sentence/s 160 ; words/s 10326 ; accuracy train : 83.6387
-473472 ; loss 0.42 ; sentence/s 158 ; words/s 10291 ; accuracy train : 83.6438
-486272 ; loss 0.43 ; sentence/s 161 ; words/s 10195 ; accuracy train : 83.6493
-499072 ; loss 0.43 ; sentence/s 161 ; words/s 10249 ; accuracy train : 83.6508
-511872 ; loss 0.43 ; sentence/s 159 ; words/s 10180 ; accuracy train : 83.6498
-524672 ; loss 0.43 ; sentence/s 161 ; words/s 10313 ; accuracy train : 83.6625
-537472 ; loss 0.43 ; sentence/s 162 ; words/s 10212 ; accuracy train : 83.6583
-results : epoch 3 ; mean accuracy train : 83.0
+                          TRAINING : Epoch 3
+                          Learning rate : 0.001
+                          12672 ; loss 0.41 ; sentence/s 159 ; words/s 10280 ; accuracy train : 84.5547
+                          25472 ; loss 0.41 ; sentence/s 160 ; words/s 10274 ; accuracy train : 84.6211
+                          38272 ; loss 0.41 ; sentence/s 162 ; words/s 10134 ; accuracy train : 84.5365
+                          51072 ; loss 0.43 ; sentence/s 161 ; words/s 10235 ; accuracy train : 84.3086
+                          63872 ; loss 0.43 ; sentence/s 158 ; words/s 10394 ; accuracy train : 84.1375
+                          76672 ; loss 0.43 ; sentence/s 161 ; words/s 10249 ; accuracy train : 83.9388
+                          89472 ; loss 0.41 ; sentence/s 160 ; words/s 10306 ; accuracy train : 84.0011
+                          102272 ; loss 0.43 ; sentence/s 160 ; words/s 10317 ; accuracy train : 83.9883
+                          115072 ; loss 0.43 ; sentence/s 158 ; words/s 10202 ; accuracy train : 83.9714
+                          127872 ; loss 0.42 ; sentence/s 159 ; words/s 10230 ; accuracy train : 83.9578
+                          140672 ; loss 0.44 ; sentence/s 160 ; words/s 10260 ; accuracy train : 83.8849
+                          153472 ; loss 0.44 ; sentence/s 161 ; words/s 10213 ; accuracy train : 83.7930
+                          166272 ; loss 0.42 ; sentence/s 158 ; words/s 10308 ; accuracy train : 83.8173
+                          179072 ; loss 0.43 ; sentence/s 160 ; words/s 10254 ; accuracy train : 83.7974
+                          191872 ; loss 0.44 ; sentence/s 160 ; words/s 10240 ; accuracy train : 83.7589
+                          204672 ; loss 0.42 ; sentence/s 159 ; words/s 10276 ; accuracy train : 83.7427
+                          217472 ; loss 0.43 ; sentence/s 159 ; words/s 10285 ; accuracy train : 83.6967
+                          230272 ; loss 0.43 ; sentence/s 160 ; words/s 10297 ; accuracy train : 83.7031
+                          243072 ; loss 0.42 ; sentence/s 161 ; words/s 10207 ; accuracy train : 83.7068
+                          255872 ; loss 0.43 ; sentence/s 160 ; words/s 10209 ; accuracy train : 83.7027
+                          268672 ; loss 0.43 ; sentence/s 158 ; words/s 10303 ; accuracy train : 83.7042
+                          281472 ; loss 0.42 ; sentence/s 161 ; words/s 10246 ; accuracy train : 83.7081
+                          294272 ; loss 0.44 ; sentence/s 157 ; words/s 10325 ; accuracy train : 83.6807
+                          307072 ; loss 0.44 ; sentence/s 158 ; words/s 10379 ; accuracy train : 83.6654
+                          319872 ; loss 0.43 ; sentence/s 160 ; words/s 10240 ; accuracy train : 83.6578
+                          332672 ; loss 0.43 ; sentence/s 161 ; words/s 10243 ; accuracy train : 83.6340
+                          345472 ; loss 0.43 ; sentence/s 160 ; words/s 10280 ; accuracy train : 83.6360
+                          358272 ; loss 0.43 ; sentence/s 158 ; words/s 10247 ; accuracy train : 83.6454
+                          371072 ; loss 0.42 ; sentence/s 163 ; words/s 10174 ; accuracy train : 83.6527
+                          383872 ; loss 0.43 ; sentence/s 159 ; words/s 10349 ; accuracy train : 83.6589
+                          396672 ; loss 0.43 ; sentence/s 158 ; words/s 10334 ; accuracy train : 83.6600
+                          409472 ; loss 0.43 ; sentence/s 158 ; words/s 10406 ; accuracy train : 83.6663
+                          422272 ; loss 0.43 ; sentence/s 159 ; words/s 10273 ; accuracy train : 83.6565
+                          435072 ; loss 0.44 ; sentence/s 160 ; words/s 10221 ; accuracy train : 83.6406
+                          447872 ; loss 0.44 ; sentence/s 160 ; words/s 10251 ; accuracy train : 83.6420
+                          460672 ; loss 0.43 ; sentence/s 160 ; words/s 10326 ; accuracy train : 83.6387
+                          473472 ; loss 0.42 ; sentence/s 158 ; words/s 10291 ; accuracy train : 83.6438
+                          486272 ; loss 0.43 ; sentence/s 161 ; words/s 10195 ; accuracy train : 83.6493
+                          499072 ; loss 0.43 ; sentence/s 161 ; words/s 10249 ; accuracy train : 83.6508
+                          511872 ; loss 0.43 ; sentence/s 159 ; words/s 10180 ; accuracy train : 83.6498
+                          524672 ; loss 0.43 ; sentence/s 161 ; words/s 10313 ; accuracy train : 83.6625
+                          537472 ; loss 0.43 ; sentence/s 162 ; words/s 10212 ; accuracy train : 83.6583
+                          results : epoch 3 ; mean accuracy train : 83.0
 
-VALIDATION : Epoch 3
-togrep : results : epoch 3 ; mean accuracy valid :              83.2859174964
-saving model at epoch 3
+                          VALIDATION : Epoch 3
+                          togrep : results : epoch 3 ; mean accuracy valid :              83.2859174964
+                          saving model at epoch 3
 
-TRAINING : Epoch 4
-Learning rate : 0.001
-12672 ; loss 0.38 ; sentence/s 161 ; words/s 10311 ; accuracy train : 85.8203
-25472 ; loss 0.38 ; sentence/s 161 ; words/s 10274 ; accuracy train : 85.6914
-38272 ; loss 0.38 ; sentence/s 161 ; words/s 10351 ; accuracy train : 85.6094
-51072 ; loss 0.38 ; sentence/s 158 ; words/s 10365 ; accuracy train : 85.5859
-63872 ; loss 0.38 ; sentence/s 161 ; words/s 10234 ; accuracy train : 85.5578
-76672 ; loss 0.39 ; sentence/s 161 ; words/s 10282 ; accuracy train : 85.3867
-89472 ; loss 0.39 ; sentence/s 159 ; words/s 10282 ; accuracy train : 85.3527
-102272 ; loss 0.38 ; sentence/s 161 ; words/s 10205 ; accuracy train : 85.4062
-115072 ; loss 0.38 ; sentence/s 160 ; words/s 10227 ; accuracy train : 85.4618
-127872 ; loss 0.39 ; sentence/s 157 ; words/s 10234 ; accuracy train : 85.4484
-140672 ; loss 0.39 ; sentence/s 159 ; words/s 10335 ; accuracy train : 85.4297
-153472 ; loss 0.39 ; sentence/s 162 ; words/s 10242 ; accuracy train : 85.4368
-166272 ; loss 0.39 ; sentence/s 161 ; words/s 10173 ; accuracy train : 85.4321
-179072 ; loss 0.38 ; sentence/s 161 ; words/s 10267 ; accuracy train : 85.4621
-191872 ; loss 0.41 ; sentence/s 161 ; words/s 10241 ; accuracy train : 85.4010
-204672 ; loss 0.39 ; sentence/s 159 ; words/s 10321 ; accuracy train : 85.3843
-217472 ; loss 0.4 ; sentence/s 156 ; words/s 10434 ; accuracy train : 85.3704
-230272 ; loss 0.4 ; sentence/s 160 ; words/s 10209 ; accuracy train : 85.3407
-243072 ; loss 0.39 ; sentence/s 161 ; words/s 10257 ; accuracy train : 85.3183
-255872 ; loss 0.4 ; sentence/s 157 ; words/s 10361 ; accuracy train : 85.3063
-268672 ; loss 0.38 ; sentence/s 159 ; words/s 10305 ; accuracy train : 85.3095
-281472 ; loss 0.39 ; sentence/s 159 ; words/s 10265 ; accuracy train : 85.2947
-294272 ; loss 0.4 ; sentence/s 160 ; words/s 10228 ; accuracy train : 85.2826
-307072 ; loss 0.39 ; sentence/s 162 ; words/s 10241 ; accuracy train : 85.2702
-319872 ; loss 0.4 ; sentence/s 160 ; words/s 10244 ; accuracy train : 85.2444
-332672 ; loss 0.41 ; sentence/s 161 ; words/s 10210 ; accuracy train : 85.2178
-345472 ; loss 0.4 ; sentence/s 161 ; words/s 10289 ; accuracy train : 85.2049
-358272 ; loss 0.4 ; sentence/s 159 ; words/s 10394 ; accuracy train : 85.1973
-371072 ; loss 0.39 ; sentence/s 161 ; words/s 10262 ; accuracy train : 85.1845
-383872 ; loss 0.4 ; sentence/s 160 ; words/s 10307 ; accuracy train : 85.1773
-396672 ; loss 0.39 ; sentence/s 162 ; words/s 10129 ; accuracy train : 85.1799
-409472 ; loss 0.4 ; sentence/s 161 ; words/s 10267 ; accuracy train : 85.1685
-422272 ; loss 0.4 ; sentence/s 159 ; words/s 10233 ; accuracy train : 85.1584
-435072 ; loss 0.39 ; sentence/s 159 ; words/s 10272 ; accuracy train : 85.1618
-447872 ; loss 0.4 ; sentence/s 159 ; words/s 10277 ; accuracy train : 85.1496
-460672 ; loss 0.4 ; sentence/s 160 ; words/s 10247 ; accuracy train : 85.1374
-473472 ; loss 0.4 ; sentence/s 159 ; words/s 10176 ; accuracy train : 85.1100
-486272 ; loss 0.4 ; sentence/s 161 ; words/s 10296 ; accuracy train : 85.1040
-499072 ; loss 0.39 ; sentence/s 160 ; words/s 10272 ; accuracy train : 85.1090
-511872 ; loss 0.4 ; sentence/s 157 ; words/s 10427 ; accuracy train : 85.0967
-524672 ; loss 0.41 ; sentence/s 156 ; words/s 10410 ; accuracy train : 85.0852
-537472 ; loss 0.39 ; sentence/s 160 ; words/s 10349 ; accuracy train : 85.0796
-results : epoch 4 ; mean accuracy train : 85.0
+                          TRAINING : Epoch 4
+                          Learning rate : 0.001
+                          12672 ; loss 0.38 ; sentence/s 161 ; words/s 10311 ; accuracy train : 85.8203
+                          25472 ; loss 0.38 ; sentence/s 161 ; words/s 10274 ; accuracy train : 85.6914
+                          38272 ; loss 0.38 ; sentence/s 161 ; words/s 10351 ; accuracy train : 85.6094
+                          51072 ; loss 0.38 ; sentence/s 158 ; words/s 10365 ; accuracy train : 85.5859
+                          63872 ; loss 0.38 ; sentence/s 161 ; words/s 10234 ; accuracy train : 85.5578
+                          76672 ; loss 0.39 ; sentence/s 161 ; words/s 10282 ; accuracy train : 85.3867
+                          89472 ; loss 0.39 ; sentence/s 159 ; words/s 10282 ; accuracy train : 85.3527
+                          102272 ; loss 0.38 ; sentence/s 161 ; words/s 10205 ; accuracy train : 85.4062
+                          115072 ; loss 0.38 ; sentence/s 160 ; words/s 10227 ; accuracy train : 85.4618
+                          127872 ; loss 0.39 ; sentence/s 157 ; words/s 10234 ; accuracy train : 85.4484
+                          140672 ; loss 0.39 ; sentence/s 159 ; words/s 10335 ; accuracy train : 85.4297
+                          153472 ; loss 0.39 ; sentence/s 162 ; words/s 10242 ; accuracy train : 85.4368
+                          166272 ; loss 0.39 ; sentence/s 161 ; words/s 10173 ; accuracy train : 85.4321
+                          179072 ; loss 0.38 ; sentence/s 161 ; words/s 10267 ; accuracy train : 85.4621
+                          191872 ; loss 0.41 ; sentence/s 161 ; words/s 10241 ; accuracy train : 85.4010
+                          204672 ; loss 0.39 ; sentence/s 159 ; words/s 10321 ; accuracy train : 85.3843
+                          217472 ; loss 0.4 ; sentence/s 156 ; words/s 10434 ; accuracy train : 85.3704
+                          230272 ; loss 0.4 ; sentence/s 160 ; words/s 10209 ; accuracy train : 85.3407
+                          243072 ; loss 0.39 ; sentence/s 161 ; words/s 10257 ; accuracy train : 85.3183
+                          255872 ; loss 0.4 ; sentence/s 157 ; words/s 10361 ; accuracy train : 85.3063
+                          268672 ; loss 0.38 ; sentence/s 159 ; words/s 10305 ; accuracy train : 85.3095
+                          281472 ; loss 0.39 ; sentence/s 159 ; words/s 10265 ; accuracy train : 85.2947
+                          294272 ; loss 0.4 ; sentence/s 160 ; words/s 10228 ; accuracy train : 85.2826
+                          307072 ; loss 0.39 ; sentence/s 162 ; words/s 10241 ; accuracy train : 85.2702
+                          319872 ; loss 0.4 ; sentence/s 160 ; words/s 10244 ; accuracy train : 85.2444
+                          332672 ; loss 0.41 ; sentence/s 161 ; words/s 10210 ; accuracy train : 85.2178
+                          345472 ; loss 0.4 ; sentence/s 161 ; words/s 10289 ; accuracy train : 85.2049
+                          358272 ; loss 0.4 ; sentence/s 159 ; words/s 10394 ; accuracy train : 85.1973
+                          371072 ; loss 0.39 ; sentence/s 161 ; words/s 10262 ; accuracy train : 85.1845
+                          383872 ; loss 0.4 ; sentence/s 160 ; words/s 10307 ; accuracy train : 85.1773
+                          396672 ; loss 0.39 ; sentence/s 162 ; words/s 10129 ; accuracy train : 85.1799
+                          409472 ; loss 0.4 ; sentence/s 161 ; words/s 10267 ; accuracy train : 85.1685
+                          422272 ; loss 0.4 ; sentence/s 159 ; words/s 10233 ; accuracy train : 85.1584
+                          435072 ; loss 0.39 ; sentence/s 159 ; words/s 10272 ; accuracy train : 85.1618
+                          447872 ; loss 0.4 ; sentence/s 159 ; words/s 10277 ; accuracy train : 85.1496
+                          460672 ; loss 0.4 ; sentence/s 160 ; words/s 10247 ; accuracy train : 85.1374
+                          473472 ; loss 0.4 ; sentence/s 159 ; words/s 10176 ; accuracy train : 85.1100
+                          486272 ; loss 0.4 ; sentence/s 161 ; words/s 10296 ; accuracy train : 85.1040
+                          499072 ; loss 0.39 ; sentence/s 160 ; words/s 10272 ; accuracy train : 85.1090
+                          511872 ; loss 0.4 ; sentence/s 157 ; words/s 10427 ; accuracy train : 85.0967
+                          524672 ; loss 0.41 ; sentence/s 156 ; words/s 10410 ; accuracy train : 85.0852
+                          537472 ; loss 0.39 ; sentence/s 160 ; words/s 10349 ; accuracy train : 85.0796
+                          results : epoch 4 ; mean accuracy train : 85.0
 
-VALIDATION : Epoch 4
-togrep : results : epoch 4 ; mean accuracy valid :              84.34261329
-saving model at epoch 4
+                          VALIDATION : Epoch 4
+                          togrep : results : epoch 4 ; mean accuracy valid :              84.34261329
+                          saving model at epoch 4
 
-TRAINING : Epoch 5
-Learning rate : 0.001
-12672 ; loss 0.34 ; sentence/s 160 ; words/s 10222 ; accuracy train : 87.5391
-25472 ; loss 0.33 ; sentence/s 160 ; words/s 10235 ; accuracy train : 87.7344
-38272 ; loss 0.34 ; sentence/s 159 ; words/s 10236 ; accuracy train : 87.7318
-51072 ; loss 0.35 ; sentence/s 162 ; words/s 10128 ; accuracy train : 87.5781
-63872 ; loss 0.35 ; sentence/s 159 ; words/s 10303 ; accuracy train : 87.4062
-76672 ; loss 0.35 ; sentence/s 160 ; words/s 10244 ; accuracy train : 87.3906
-89472 ; loss 0.35 ; sentence/s 159 ; words/s 10297 ; accuracy train : 87.3326
-102272 ; loss 0.35 ; sentence/s 160 ; words/s 10251 ; accuracy train : 87.2764
-115072 ; loss 0.35 ; sentence/s 161 ; words/s 10201 ; accuracy train : 87.2179
-127872 ; loss 0.35 ; sentence/s 158 ; words/s 10277 ; accuracy train : 87.1781
-140672 ; loss 0.36 ; sentence/s 160 ; words/s 10306 ; accuracy train : 87.1122
-153472 ; loss 0.36 ; sentence/s 159 ; words/s 10213 ; accuracy train : 87.0312
-166272 ; loss 0.36 ; sentence/s 161 ; words/s 10290 ; accuracy train : 86.9964
-179072 ; loss 0.36 ; sentence/s 158 ; words/s 10335 ; accuracy train : 86.9319
-191872 ; loss 0.35 ; sentence/s 159 ; words/s 10286 ; accuracy train : 86.9245
-204672 ; loss 0.36 ; sentence/s 157 ; words/s 10321 ; accuracy train : 86.8848
-217472 ; loss 0.36 ; sentence/s 159 ; words/s 10287 ; accuracy train : 86.8571
-230272 ; loss 0.36 ; sentence/s 160 ; words/s 10318 ; accuracy train : 86.8355
-243072 ; loss 0.35 ; sentence/s 161 ; words/s 10216 ; accuracy train : 86.8306
-255872 ; loss 0.36 ; sentence/s 158 ; words/s 10336 ; accuracy train : 86.7988
-268672 ; loss 0.36 ; sentence/s 160 ; words/s 10273 ; accuracy train : 86.7935
-281472 ; loss 0.36 ; sentence/s 158 ; words/s 10247 ; accuracy train : 86.7731
-294272 ; loss 0.37 ; sentence/s 161 ; words/s 10237 ; accuracy train : 86.7361
-307072 ; loss 0.36 ; sentence/s 158 ; words/s 10358 ; accuracy train : 86.7113
-319872 ; loss 0.38 ; sentence/s 158 ; words/s 10345 ; accuracy train : 86.6816
-332672 ; loss 0.36 ; sentence/s 158 ; words/s 10266 ; accuracy train : 86.6632
-345472 ; loss 0.38 ; sentence/s 161 ; words/s 10161 ; accuracy train : 86.6406
-358272 ; loss 0.37 ; sentence/s 160 ; words/s 10257 ; accuracy train : 86.6102
-371072 ; loss 0.36 ; sentence/s 162 ; words/s 10245 ; accuracy train : 86.5962
-383872 ; loss 0.36 ; sentence/s 162 ; words/s 10162 ; accuracy train : 86.5901
-396672 ; loss 0.35 ; sentence/s 159 ; words/s 10334 ; accuracy train : 86.5829
-409472 ; loss 0.36 ; sentence/s 159 ; words/s 10294 ; accuracy train : 86.5850
-422272 ; loss 0.37 ; sentence/s 160 ; words/s 10241 ; accuracy train : 86.5675
-435072 ; loss 0.38 ; sentence/s 158 ; words/s 10280 ; accuracy train : 86.5476
-447872 ; loss 0.35 ; sentence/s 169 ; words/s 10974 ; accuracy train : 86.5467
-460672 ; loss 0.37 ; sentence/s 182 ; words/s 11796 ; accuracy train : 86.5224
-473472 ; loss 0.37 ; sentence/s 183 ; words/s 11871 ; accuracy train : 86.5171
-486272 ; loss 0.37 ; sentence/s 183 ; words/s 11876 ; accuracy train : 86.5008
-499072 ; loss 0.38 ; sentence/s 183 ; words/s 11824 ; accuracy train : 86.4708
-511872 ; loss 0.36 ; sentence/s 185 ; words/s 11819 ; accuracy train : 86.4613
-524672 ; loss 0.38 ; sentence/s 179 ; words/s 12081 ; accuracy train : 86.4371
-537472 ; loss 0.37 ; sentence/s 186 ; words/s 11800 ; accuracy train : 86.4275
-results : epoch 5 ; mean accuracy train : 86.0
+                          TRAINING : Epoch 5
+                          Learning rate : 0.001
+                          12672 ; loss 0.34 ; sentence/s 160 ; words/s 10222 ; accuracy train : 87.5391
+                          25472 ; loss 0.33 ; sentence/s 160 ; words/s 10235 ; accuracy train : 87.7344
+                          38272 ; loss 0.34 ; sentence/s 159 ; words/s 10236 ; accuracy train : 87.7318
+                          51072 ; loss 0.35 ; sentence/s 162 ; words/s 10128 ; accuracy train : 87.5781
+                          63872 ; loss 0.35 ; sentence/s 159 ; words/s 10303 ; accuracy train : 87.4062
+                          76672 ; loss 0.35 ; sentence/s 160 ; words/s 10244 ; accuracy train : 87.3906
+                          89472 ; loss 0.35 ; sentence/s 159 ; words/s 10297 ; accuracy train : 87.3326
+                          102272 ; loss 0.35 ; sentence/s 160 ; words/s 10251 ; accuracy train : 87.2764
+                          115072 ; loss 0.35 ; sentence/s 161 ; words/s 10201 ; accuracy train : 87.2179
+                          127872 ; loss 0.35 ; sentence/s 158 ; words/s 10277 ; accuracy train : 87.1781
+                          140672 ; loss 0.36 ; sentence/s 160 ; words/s 10306 ; accuracy train : 87.1122
+                          153472 ; loss 0.36 ; sentence/s 159 ; words/s 10213 ; accuracy train : 87.0312
+                          166272 ; loss 0.36 ; sentence/s 161 ; words/s 10290 ; accuracy train : 86.9964
+                          179072 ; loss 0.36 ; sentence/s 158 ; words/s 10335 ; accuracy train : 86.9319
+                          191872 ; loss 0.35 ; sentence/s 159 ; words/s 10286 ; accuracy train : 86.9245
+                          204672 ; loss 0.36 ; sentence/s 157 ; words/s 10321 ; accuracy train : 86.8848
+                          217472 ; loss 0.36 ; sentence/s 159 ; words/s 10287 ; accuracy train : 86.8571
+                          230272 ; loss 0.36 ; sentence/s 160 ; words/s 10318 ; accuracy train : 86.8355
+                          243072 ; loss 0.35 ; sentence/s 161 ; words/s 10216 ; accuracy train : 86.8306
+                          255872 ; loss 0.36 ; sentence/s 158 ; words/s 10336 ; accuracy train : 86.7988
+                          268672 ; loss 0.36 ; sentence/s 160 ; words/s 10273 ; accuracy train : 86.7935
+                          281472 ; loss 0.36 ; sentence/s 158 ; words/s 10247 ; accuracy train : 86.7731
+                          294272 ; loss 0.37 ; sentence/s 161 ; words/s 10237 ; accuracy train : 86.7361
+                          307072 ; loss 0.36 ; sentence/s 158 ; words/s 10358 ; accuracy train : 86.7113
+                          319872 ; loss 0.38 ; sentence/s 158 ; words/s 10345 ; accuracy train : 86.6816
+                          332672 ; loss 0.36 ; sentence/s 158 ; words/s 10266 ; accuracy train : 86.6632
+                          345472 ; loss 0.38 ; sentence/s 161 ; words/s 10161 ; accuracy train : 86.6406
+                          358272 ; loss 0.37 ; sentence/s 160 ; words/s 10257 ; accuracy train : 86.6102
+                          371072 ; loss 0.36 ; sentence/s 162 ; words/s 10245 ; accuracy train : 86.5962
+                          383872 ; loss 0.36 ; sentence/s 162 ; words/s 10162 ; accuracy train : 86.5901
+                          396672 ; loss 0.35 ; sentence/s 159 ; words/s 10334 ; accuracy train : 86.5829
+                          409472 ; loss 0.36 ; sentence/s 159 ; words/s 10294 ; accuracy train : 86.5850
+                          422272 ; loss 0.37 ; sentence/s 160 ; words/s 10241 ; accuracy train : 86.5675
+                          435072 ; loss 0.38 ; sentence/s 158 ; words/s 10280 ; accuracy train : 86.5476
+                          447872 ; loss 0.35 ; sentence/s 169 ; words/s 10974 ; accuracy train : 86.5467
+                          460672 ; loss 0.37 ; sentence/s 182 ; words/s 11796 ; accuracy train : 86.5224
+                          473472 ; loss 0.37 ; sentence/s 183 ; words/s 11871 ; accuracy train : 86.5171
+                          486272 ; loss 0.37 ; sentence/s 183 ; words/s 11876 ; accuracy train : 86.5008
+                          499072 ; loss 0.38 ; sentence/s 183 ; words/s 11824 ; accuracy train : 86.4708
+                          511872 ; loss 0.36 ; sentence/s 185 ; words/s 11819 ; accuracy train : 86.4613
+                          524672 ; loss 0.38 ; sentence/s 179 ; words/s 12081 ; accuracy train : 86.4371
+                          537472 ; loss 0.37 ; sentence/s 186 ; words/s 11800 ; accuracy train : 86.4275
+                          results : epoch 5 ; mean accuracy train : 86.0
 
-VALIDATION : Epoch 5
-togrep : results : epoch 5 ; mean accuracy valid :              84.3629343629
-saving model at epoch 5
+                          VALIDATION : Epoch 5
+                          togrep : results : epoch 5 ; mean accuracy valid :              84.3629343629
+                          saving model at epoch 5
 
-TRAINING : Epoch 6
-Learning rate : 0.001
-12672 ; loss 0.3 ; sentence/s 183 ; words/s 11726 ; accuracy train : 88.7422
-25472 ; loss 0.31 ; sentence/s 185 ; words/s 11887 ; accuracy train : 88.5078
-38272 ; loss 0.31 ; sentence/s 180 ; words/s 11994 ; accuracy train : 88.4010
-51072 ; loss 0.31 ; sentence/s 186 ; words/s 11718 ; accuracy train : 88.4336
-63872 ; loss 0.31 ; sentence/s 181 ; words/s 11948 ; accuracy train : 88.4234
-76672 ; loss 0.32 ; sentence/s 187 ; words/s 11784 ; accuracy train : 88.3932
-89472 ; loss 0.31 ; sentence/s 185 ; words/s 11826 ; accuracy train : 88.4118
-102272 ; loss 0.32 ; sentence/s 185 ; words/s 11829 ; accuracy train : 88.3877
-115072 ; loss 0.32 ; sentence/s 185 ; words/s 11815 ; accuracy train : 88.3915
-127872 ; loss 0.32 ; sentence/s 182 ; words/s 11951 ; accuracy train : 88.3961
-140672 ; loss 0.33 ; sentence/s 185 ; words/s 11758 ; accuracy train : 88.3303
-153472 ; loss 0.31 ; sentence/s 180 ; words/s 11960 ; accuracy train : 88.3294
-166272 ; loss 0.31 ; sentence/s 186 ; words/s 11791 ; accuracy train : 88.3251
-179072 ; loss 0.33 ; sentence/s 184 ; words/s 11830 ; accuracy train : 88.2623
-191872 ; loss 0.32 ; sentence/s 182 ; words/s 11983 ; accuracy train : 88.2120
-204672 ; loss 0.32 ; sentence/s 183 ; words/s 11822 ; accuracy train : 88.1885
-217472 ; loss 0.32 ; sentence/s 184 ; words/s 11766 ; accuracy train : 88.1806
-230272 ; loss 0.33 ; sentence/s 186 ; words/s 11712 ; accuracy train : 88.1376
-243072 ; loss 0.34 ; sentence/s 181 ; words/s 11947 ; accuracy train : 88.0732
-255872 ; loss 0.33 ; sentence/s 186 ; words/s 11718 ; accuracy train : 88.0680
-268672 ; loss 0.33 ; sentence/s 185 ; words/s 11713 ; accuracy train : 88.0551
-281472 ; loss 0.33 ; sentence/s 181 ; words/s 11962 ; accuracy train : 88.0394
-294272 ; loss 0.34 ; sentence/s 183 ; words/s 11822 ; accuracy train : 88.0061
-307072 ; loss 0.34 ; sentence/s 183 ; words/s 11903 ; accuracy train : 87.9671
-319872 ; loss 0.35 ; sentence/s 186 ; words/s 11867 ; accuracy train : 87.9178
-332672 ; loss 0.33 ; sentence/s 183 ; words/s 11811 ; accuracy train : 87.9144
-345472 ; loss 0.34 ; sentence/s 183 ; words/s 11776 ; accuracy train : 87.8999
-358272 ; loss 0.34 ; sentence/s 187 ; words/s 11687 ; accuracy train : 87.8736
-371072 ; loss 0.34 ; sentence/s 185 ; words/s 11745 ; accuracy train : 87.8516
-383872 ; loss 0.33 ; sentence/s 183 ; words/s 11763 ; accuracy train : 87.8286
-396672 ; loss 0.34 ; sentence/s 184 ; words/s 11794 ; accuracy train : 87.8077
-409472 ; loss 0.33 ; sentence/s 185 ; words/s 11774 ; accuracy train : 87.8047
-422272 ; loss 0.33 ; sentence/s 184 ; words/s 11898 ; accuracy train : 87.7988
-435072 ; loss 0.33 ; sentence/s 182 ; words/s 11875 ; accuracy train : 87.7930
-447872 ; loss 0.33 ; sentence/s 185 ; words/s 11641 ; accuracy train : 87.7837
-460672 ; loss 0.33 ; sentence/s 183 ; words/s 11866 ; accuracy train : 87.7706
-473472 ; loss 0.33 ; sentence/s 185 ; words/s 11759 ; accuracy train : 87.7610
-486272 ; loss 0.33 ; sentence/s 185 ; words/s 11777 ; accuracy train : 87.7695
-499072 ; loss 0.34 ; sentence/s 181 ; words/s 11887 ; accuracy train : 87.7512
-511872 ; loss 0.34 ; sentence/s 184 ; words/s 11797 ; accuracy train : 87.7285
-524672 ; loss 0.34 ; sentence/s 184 ; words/s 11809 ; accuracy train : 87.7111
-537472 ; loss 0.34 ; sentence/s 184 ; words/s 11771 ; accuracy train : 87.6972
-results : epoch 6 ; mean accuracy train : 87.0
+                          TRAINING : Epoch 6
+                          Learning rate : 0.001
+                          12672 ; loss 0.3 ; sentence/s 183 ; words/s 11726 ; accuracy train : 88.7422
+                          25472 ; loss 0.31 ; sentence/s 185 ; words/s 11887 ; accuracy train : 88.5078
+                          38272 ; loss 0.31 ; sentence/s 180 ; words/s 11994 ; accuracy train : 88.4010
+                          51072 ; loss 0.31 ; sentence/s 186 ; words/s 11718 ; accuracy train : 88.4336
+                          63872 ; loss 0.31 ; sentence/s 181 ; words/s 11948 ; accuracy train : 88.4234
+                          76672 ; loss 0.32 ; sentence/s 187 ; words/s 11784 ; accuracy train : 88.3932
+                          89472 ; loss 0.31 ; sentence/s 185 ; words/s 11826 ; accuracy train : 88.4118
+                          102272 ; loss 0.32 ; sentence/s 185 ; words/s 11829 ; accuracy train : 88.3877
+                          115072 ; loss 0.32 ; sentence/s 185 ; words/s 11815 ; accuracy train : 88.3915
+                          127872 ; loss 0.32 ; sentence/s 182 ; words/s 11951 ; accuracy train : 88.3961
+                          140672 ; loss 0.33 ; sentence/s 185 ; words/s 11758 ; accuracy train : 88.3303
+                          153472 ; loss 0.31 ; sentence/s 180 ; words/s 11960 ; accuracy train : 88.3294
+                          166272 ; loss 0.31 ; sentence/s 186 ; words/s 11791 ; accuracy train : 88.3251
+                          179072 ; loss 0.33 ; sentence/s 184 ; words/s 11830 ; accuracy train : 88.2623
+                          191872 ; loss 0.32 ; sentence/s 182 ; words/s 11983 ; accuracy train : 88.2120
+                          204672 ; loss 0.32 ; sentence/s 183 ; words/s 11822 ; accuracy train : 88.1885
+                          217472 ; loss 0.32 ; sentence/s 184 ; words/s 11766 ; accuracy train : 88.1806
+                          230272 ; loss 0.33 ; sentence/s 186 ; words/s 11712 ; accuracy train : 88.1376
+                          243072 ; loss 0.34 ; sentence/s 181 ; words/s 11947 ; accuracy train : 88.0732
+                          255872 ; loss 0.33 ; sentence/s 186 ; words/s 11718 ; accuracy train : 88.0680
+                          268672 ; loss 0.33 ; sentence/s 185 ; words/s 11713 ; accuracy train : 88.0551
+                          281472 ; loss 0.33 ; sentence/s 181 ; words/s 11962 ; accuracy train : 88.0394
+                          294272 ; loss 0.34 ; sentence/s 183 ; words/s 11822 ; accuracy train : 88.0061
+                          307072 ; loss 0.34 ; sentence/s 183 ; words/s 11903 ; accuracy train : 87.9671
+                          319872 ; loss 0.35 ; sentence/s 186 ; words/s 11867 ; accuracy train : 87.9178
+                          332672 ; loss 0.33 ; sentence/s 183 ; words/s 11811 ; accuracy train : 87.9144
+                          345472 ; loss 0.34 ; sentence/s 183 ; words/s 11776 ; accuracy train : 87.8999
+                          358272 ; loss 0.34 ; sentence/s 187 ; words/s 11687 ; accuracy train : 87.8736
+                          371072 ; loss 0.34 ; sentence/s 185 ; words/s 11745 ; accuracy train : 87.8516
+                          383872 ; loss 0.33 ; sentence/s 183 ; words/s 11763 ; accuracy train : 87.8286
+                          396672 ; loss 0.34 ; sentence/s 184 ; words/s 11794 ; accuracy train : 87.8077
+                          409472 ; loss 0.33 ; sentence/s 185 ; words/s 11774 ; accuracy train : 87.8047
+                          422272 ; loss 0.33 ; sentence/s 184 ; words/s 11898 ; accuracy train : 87.7988
+                          435072 ; loss 0.33 ; sentence/s 182 ; words/s 11875 ; accuracy train : 87.7930
+                          447872 ; loss 0.33 ; sentence/s 185 ; words/s 11641 ; accuracy train : 87.7837
+                          460672 ; loss 0.33 ; sentence/s 183 ; words/s 11866 ; accuracy train : 87.7706
+                          473472 ; loss 0.33 ; sentence/s 185 ; words/s 11759 ; accuracy train : 87.7610
+                          486272 ; loss 0.33 ; sentence/s 185 ; words/s 11777 ; accuracy train : 87.7695
+                          499072 ; loss 0.34 ; sentence/s 181 ; words/s 11887 ; accuracy train : 87.7512
+                          511872 ; loss 0.34 ; sentence/s 184 ; words/s 11797 ; accuracy train : 87.7285
+                          524672 ; loss 0.34 ; sentence/s 184 ; words/s 11809 ; accuracy train : 87.7111
+                          537472 ; loss 0.34 ; sentence/s 184 ; words/s 11771 ; accuracy train : 87.6972
+                          results : epoch 6 ; mean accuracy train : 87.0
 
-VALIDATION : Epoch 6
-togrep : results : epoch 6 ; mean accuracy valid :              83.9260312945
+                          VALIDATION : Epoch 6
+                          togrep : results : epoch 6 ; mean accuracy valid :              83.9260312945
 
-TRAINING : Epoch 7
-Learning rate : 0.001
-12672 ; loss 0.26 ; sentence/s 181 ; words/s 11873 ; accuracy train : 90.2500
-25472 ; loss 0.27 ; sentence/s 184 ; words/s 11806 ; accuracy train : 90.1680
-38272 ; loss 0.27 ; sentence/s 186 ; words/s 11725 ; accuracy train : 90.0417
-51072 ; loss 0.27 ; sentence/s 181 ; words/s 11922 ; accuracy train : 89.9570
-63872 ; loss 0.28 ; sentence/s 184 ; words/s 11685 ; accuracy train : 89.8641
-76672 ; loss 0.3 ; sentence/s 181 ; words/s 11950 ; accuracy train : 89.7513
-89472 ; loss 0.28 ; sentence/s 184 ; words/s 11770 ; accuracy train : 89.7478
-102272 ; loss 0.28 ; sentence/s 184 ; words/s 11791 ; accuracy train : 89.7031
-115072 ; loss 0.28 ; sentence/s 185 ; words/s 11704 ; accuracy train : 89.6823
-127872 ; loss 0.3 ; sentence/s 183 ; words/s 11926 ; accuracy train : 89.5852
-140672 ; loss 0.29 ; sentence/s 184 ; words/s 11753 ; accuracy train : 89.5078
-153472 ; loss 0.28 ; sentence/s 187 ; words/s 11616 ; accuracy train : 89.4824
-166272 ; loss 0.29 ; sentence/s 182 ; words/s 11833 ; accuracy train : 89.4820
-179072 ; loss 0.29 ; sentence/s 183 ; words/s 11807 ; accuracy train : 89.4263
-191872 ; loss 0.3 ; sentence/s 182 ; words/s 11921 ; accuracy train : 89.3552
-204672 ; loss 0.29 ; sentence/s 181 ; words/s 11872 ; accuracy train : 89.3315
-217472 ; loss 0.29 ; sentence/s 187 ; words/s 11763 ; accuracy train : 89.3208
-230272 ; loss 0.31 ; sentence/s 182 ; words/s 11838 ; accuracy train : 89.2795
-243072 ; loss 0.31 ; sentence/s 184 ; words/s 11815 ; accuracy train : 89.2656
-255872 ; loss 0.31 ; sentence/s 185 ; words/s 11776 ; accuracy train : 89.2094
-268672 ; loss 0.3 ; sentence/s 184 ; words/s 11861 ; accuracy train : 89.1964
-281472 ; loss 0.3 ; sentence/s 184 ; words/s 11818 ; accuracy train : 89.1747
-294272 ; loss 0.31 ; sentence/s 184 ; words/s 11815 ; accuracy train : 89.1396
-307072 ; loss 0.31 ; sentence/s 185 ; words/s 11772 ; accuracy train : 89.1149
-319872 ; loss 0.31 ; sentence/s 183 ; words/s 11818 ; accuracy train : 89.0941
-332672 ; loss 0.31 ; sentence/s 186 ; words/s 11647 ; accuracy train : 89.0742
-345472 ; loss 0.3 ; sentence/s 186 ; words/s 11766 ; accuracy train : 89.0625
-358272 ; loss 0.3 ; sentence/s 183 ; words/s 11804 ; accuracy train : 89.0444
-371072 ; loss 0.31 ; sentence/s 184 ; words/s 11793 ; accuracy train : 89.0164
-383872 ; loss 0.3 ; sentence/s 183 ; words/s 11829 ; accuracy train : 89.0065
-396672 ; loss 0.31 ; sentence/s 182 ; words/s 11916 ; accuracy train : 88.9826
-409472 ; loss 0.31 ; sentence/s 183 ; words/s 11871 ; accuracy train : 88.9651
-422272 ; loss 0.3 ; sentence/s 182 ; words/s 11887 ; accuracy train : 88.9588
-435072 ; loss 0.31 ; sentence/s 184 ; words/s 11760 ; accuracy train : 88.9435
-447872 ; loss 0.32 ; sentence/s 182 ; words/s 11886 ; accuracy train : 88.9105
-460672 ; loss 0.31 ; sentence/s 181 ; words/s 11962 ; accuracy train : 88.8995
-473472 ; loss 0.31 ; sentence/s 183 ; words/s 11834 ; accuracy train : 88.8815
-486272 ; loss 0.31 ; sentence/s 186 ; words/s 11764 ; accuracy train : 88.8781
-499072 ; loss 0.32 ; sentence/s 187 ; words/s 11708 ; accuracy train : 88.8548
-511872 ; loss 0.31 ; sentence/s 184 ; words/s 11824 ; accuracy train : 88.8396
-524672 ; loss 0.32 ; sentence/s 184 ; words/s 11831 ; accuracy train : 88.8209
-537472 ; loss 0.3 ; sentence/s 182 ; words/s 11867 ; accuracy train : 88.8149
-results : epoch 7 ; mean accuracy train : 88.0
+                          TRAINING : Epoch 7
+                          Learning rate : 0.001
+                          12672 ; loss 0.26 ; sentence/s 181 ; words/s 11873 ; accuracy train : 90.2500
+                          25472 ; loss 0.27 ; sentence/s 184 ; words/s 11806 ; accuracy train : 90.1680
+                          38272 ; loss 0.27 ; sentence/s 186 ; words/s 11725 ; accuracy train : 90.0417
+                          51072 ; loss 0.27 ; sentence/s 181 ; words/s 11922 ; accuracy train : 89.9570
+                          63872 ; loss 0.28 ; sentence/s 184 ; words/s 11685 ; accuracy train : 89.8641
+                          76672 ; loss 0.3 ; sentence/s 181 ; words/s 11950 ; accuracy train : 89.7513
+                          89472 ; loss 0.28 ; sentence/s 184 ; words/s 11770 ; accuracy train : 89.7478
+                          102272 ; loss 0.28 ; sentence/s 184 ; words/s 11791 ; accuracy train : 89.7031
+                          115072 ; loss 0.28 ; sentence/s 185 ; words/s 11704 ; accuracy train : 89.6823
+                          127872 ; loss 0.3 ; sentence/s 183 ; words/s 11926 ; accuracy train : 89.5852
+                          140672 ; loss 0.29 ; sentence/s 184 ; words/s 11753 ; accuracy train : 89.5078
+                          153472 ; loss 0.28 ; sentence/s 187 ; words/s 11616 ; accuracy train : 89.4824
+                          166272 ; loss 0.29 ; sentence/s 182 ; words/s 11833 ; accuracy train : 89.4820
+                          179072 ; loss 0.29 ; sentence/s 183 ; words/s 11807 ; accuracy train : 89.4263
+                          191872 ; loss 0.3 ; sentence/s 182 ; words/s 11921 ; accuracy train : 89.3552
+                          204672 ; loss 0.29 ; sentence/s 181 ; words/s 11872 ; accuracy train : 89.3315
+                          217472 ; loss 0.29 ; sentence/s 187 ; words/s 11763 ; accuracy train : 89.3208
+                          230272 ; loss 0.31 ; sentence/s 182 ; words/s 11838 ; accuracy train : 89.2795
+                          243072 ; loss 0.31 ; sentence/s 184 ; words/s 11815 ; accuracy train : 89.2656
+                          255872 ; loss 0.31 ; sentence/s 185 ; words/s 11776 ; accuracy train : 89.2094
+                          268672 ; loss 0.3 ; sentence/s 184 ; words/s 11861 ; accuracy train : 89.1964
+                          281472 ; loss 0.3 ; sentence/s 184 ; words/s 11818 ; accuracy train : 89.1747
+                          294272 ; loss 0.31 ; sentence/s 184 ; words/s 11815 ; accuracy train : 89.1396
+                          307072 ; loss 0.31 ; sentence/s 185 ; words/s 11772 ; accuracy train : 89.1149
+                          319872 ; loss 0.31 ; sentence/s 183 ; words/s 11818 ; accuracy train : 89.0941
+                          332672 ; loss 0.31 ; sentence/s 186 ; words/s 11647 ; accuracy train : 89.0742
+                          345472 ; loss 0.3 ; sentence/s 186 ; words/s 11766 ; accuracy train : 89.0625
+                          358272 ; loss 0.3 ; sentence/s 183 ; words/s 11804 ; accuracy train : 89.0444
+                          371072 ; loss 0.31 ; sentence/s 184 ; words/s 11793 ; accuracy train : 89.0164
+                          383872 ; loss 0.3 ; sentence/s 183 ; words/s 11829 ; accuracy train : 89.0065
+                          396672 ; loss 0.31 ; sentence/s 182 ; words/s 11916 ; accuracy train : 88.9826
+                          409472 ; loss 0.31 ; sentence/s 183 ; words/s 11871 ; accuracy train : 88.9651
+                          422272 ; loss 0.3 ; sentence/s 182 ; words/s 11887 ; accuracy train : 88.9588
+                          435072 ; loss 0.31 ; sentence/s 184 ; words/s 11760 ; accuracy train : 88.9435
+                          447872 ; loss 0.32 ; sentence/s 182 ; words/s 11886 ; accuracy train : 88.9105
+                          460672 ; loss 0.31 ; sentence/s 181 ; words/s 11962 ; accuracy train : 88.8995
+                          473472 ; loss 0.31 ; sentence/s 183 ; words/s 11834 ; accuracy train : 88.8815
+                          486272 ; loss 0.31 ; sentence/s 186 ; words/s 11764 ; accuracy train : 88.8781
+                          499072 ; loss 0.32 ; sentence/s 187 ; words/s 11708 ; accuracy train : 88.8548
+                          511872 ; loss 0.31 ; sentence/s 184 ; words/s 11824 ; accuracy train : 88.8396
+                          524672 ; loss 0.32 ; sentence/s 184 ; words/s 11831 ; accuracy train : 88.8209
+                          537472 ; loss 0.3 ; sentence/s 182 ; words/s 11867 ; accuracy train : 88.8149
+                          results : epoch 7 ; mean accuracy train : 88.0
 
-VALIDATION : Epoch 7
-togrep : results : epoch 7 ; mean accuracy valid :              83.6008941272
+                          VALIDATION : Epoch 7
+                          togrep : results : epoch 7 ; mean accuracy valid :              83.6008941272
 
-TEST : Epoch 8
+                          TEST : Epoch 8
 
-VALIDATION : Epoch 1000000.0
-finalgrep : accuracy valid : 84.3629343629
-finalgrep : accuracy test : 83.7642508143
+                          VALIDATION : Epoch 1000000.0
+                          finalgrep : accuracy valid : 84.3629343629
+                          finalgrep : accuracy test : 83.7642508143
+

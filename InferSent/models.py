@@ -757,14 +757,15 @@ class NLINet(nn.Module):
         self.enc_lstm_dim = config['enc_lstm_dim']
         self.encoder_type = config['encoder_type']
         self.dpout_fc = config['dpout_fc']
-
+        self.use_adv = config['use_adv']
         self.encoder = eval(self.encoder_type)(config)
         self.inputdim = 4*2*self.enc_lstm_dim
         self.inputdim = 4*self.inputdim if self.encoder_type in \
                         ["ConvNetEncoder", "InnerAttentionMILAEncoder"] else self.inputdim
         self.inputdim = self.inputdim/2 if self.encoder_type == "LSTMEncoder" \
                                         else self.inputdim
-        self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
+        if self.use_adv:
+            self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
         if self.nonlinear_fc:
             self.classifier = nn.Sequential(
                 nn.Dropout(p=self.dpout_fc),
@@ -789,11 +790,11 @@ class NLINet(nn.Module):
         v = self.encoder(s2)
         
         #print(u.size())
-        gradReversedV=grad_reverse(v)
-        #print(gradReversedU.size())
-        adversaryOutput=self.hyp_adverse(gradReversedV)
-        #print(adversaryOutput.size())
-        #adversaryOutput=None
+        if self.use_adv:
+            gradReversedV=grad_reverse(v)
+            adversaryOutput=self.hyp_adverse(gradReversedV)
+        else:
+            adversaryOutput=None
 
         features = torch.cat((u, v, torch.abs(u-v), u*v), 1)
         output = self.classifier(features)
