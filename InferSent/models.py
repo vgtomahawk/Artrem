@@ -758,6 +758,7 @@ class NLINet(nn.Module):
         self.encoder_type = config['encoder_type']
         self.dpout_fc = config['dpout_fc']
         self.use_adv = config['use_adv']
+        self.deeper_adv = config['deeper_adv']
         self.encoder = eval(self.encoder_type)(config)
         self.inputdim = 4*2*self.enc_lstm_dim
         self.inputdim = 4*self.inputdim if self.encoder_type in \
@@ -765,16 +766,16 @@ class NLINet(nn.Module):
         self.inputdim = self.inputdim/2 if self.encoder_type == "LSTMEncoder" \
                                         else self.inputdim
         if self.use_adv:
-            #if self.deeper_adv:
-            #     self.hyp_adverse = nn.Sequential(
-            #        nn.Linear(2*self.enc_lstm_dim, self.fc_dim/2),
-            #        nn.Tanh(),
-            #        nn.Linear(self.fc_dim/2, self.fc_dim/2),
-            #        nn.Tanh(),
-            #        nn.Linear(self.fc_dim/2, self.n_classes),
-            #        )
-            #else:
-            self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
+            if self.deeper_adv:
+                 self.hyp_adverse = nn.Sequential(
+                    nn.Linear(2*self.enc_lstm_dim, self.fc_dim/2),
+                    nn.Tanh(),
+                    nn.Linear(self.fc_dim/2, self.fc_dim/2),
+                    nn.Tanh(),
+                    nn.Linear(self.fc_dim/2, self.n_classes),
+                    )
+            else:
+                self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
         
         if self.nonlinear_fc:
             self.classifier = nn.Sequential(
