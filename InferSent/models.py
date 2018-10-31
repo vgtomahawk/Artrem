@@ -765,7 +765,17 @@ class NLINet(nn.Module):
         self.inputdim = self.inputdim/2 if self.encoder_type == "LSTMEncoder" \
                                         else self.inputdim
         if self.use_adv:
-            self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
+            if self.deeper_adv:
+                 self.hyp_adverse = nn.Sequential(
+                    nn.Linear(2*self.enc_lstm_dim, self.fc_dim/2),
+                    nn.Tanh(),
+                    nn.Linear(self.fc_dim/2, self.fc_dim/2),
+                    nn.Tanh(),
+                    nn.Linear(self.fc_dim/2, self.n_classes),
+                    )
+            else:
+                self.hyp_adverse = nn.Linear(2*self.enc_lstm_dim, self.n_classes)
+        
         if self.nonlinear_fc:
             self.classifier = nn.Sequential(
                 nn.Dropout(p=self.dpout_fc),
