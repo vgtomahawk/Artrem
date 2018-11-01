@@ -39,6 +39,7 @@ parser.add_argument("--lrshrink", type=float, default=5, help="shrink factor for
 parser.add_argument("--decay", type=float, default=0.99, help="lr decay")
 parser.add_argument("--minlr", type=float, default=1e-5, help="minimum lr")
 parser.add_argument("--max_norm", type=float, default=5., help="max norm (grad clipping)")
+parser.add_argument("--no_early_stopping",action='store_true',help="don't cut the model training after two validation decreases")
 
 # model
 parser.add_argument("--encoder_type", type=str, default='InferSent', help="see list of encoders")
@@ -295,7 +296,7 @@ epoch = 1
 # Load the best model so far.
 #nli_net.load_state_dict(torch.load(os.path.join(params.outputdir, params.outputmodelname)))
 
-while not stop_training and epoch <= params.n_epochs:
+while (not stop_training or params.no_early_stopping) and epoch <= params.n_epochs:
     train_acc = trainepoch(epoch)
     eval_acc = evaluate(epoch, 'valid')
     epoch += 1
