@@ -759,13 +759,14 @@ class NLINet(nn.Module):
         self.dpout_fc = config['dpout_fc']
         self.use_adv = config['use_adv']
         self.deeper_adv = config['deeper_adv']
+        self.full_through_adversary = config['full_through_adversary']
         self.encoder = eval(self.encoder_type)(config)
         self.inputdim = 4*2*self.enc_lstm_dim
         self.inputdim = 4*self.inputdim if self.encoder_type in \
                         ["ConvNetEncoder", "InnerAttentionMILAEncoder"] else self.inputdim
         self.inputdim = self.inputdim/2 if self.encoder_type == "LSTMEncoder" \
                                         else self.inputdim
-        if self.use_adv:
+        if self.use_adv and not self.full_through_adversary:
             if self.deeper_adv:
                  self.hyp_adverse = nn.Sequential(
                     nn.Linear(2*self.enc_lstm_dim, self.fc_dim/2),
@@ -803,7 +804,12 @@ class NLINet(nn.Module):
         #print(u.size())
         if self.use_adv:
             gradReversedV=grad_reverse(v)
-            adversaryOutput=self.hyp_adverse(gradReversedV)
+            if self.full_through_adversary:
+                maskedU = u*0
+                adversaryFeatures = torch.cat((maskedU, gradReversedV, torch.abs(maskedU-gradReversedV), (maskedU)*gradReversedV), 1)
+                adversaryOutput = self.classifier(adversaryFeatures)
+            else:
+                adversaryOutput=self.hyp_adverse(gradReversedV)
         else:
             adversaryOutput=None
 

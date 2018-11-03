@@ -53,6 +53,7 @@ parser.add_argument("--pool_type", type=str, default='max', help="max or mean")
 parser.add_argument("--use_adv",action='store_true',help="whether to use the adversary loss or not")
 parser.add_argument("--lambda_adv",type=float,default=0.001,help="coefficient of the adversarial loss")
 parser.add_argument("--deeper_adv",action='store_true',help="deeper adversary")
+parser.add_argument("--full_through_adversary",action='store_true',help="full_through_adversary")
 
 #adversary annealing parameters
 parser.add_argument("--annealing",action='store_true',help="anneal in adversary loss weight")
@@ -119,6 +120,7 @@ config_nli_model = {
     'use_cuda'       :  False                  ,
     'use_adv'        :  params.use_adv         , 
     'deeper_adv'     :  params.deeper_adv      ,
+    'full_through_adversary': params.full_through_adversary ,
 }
 
 # model
