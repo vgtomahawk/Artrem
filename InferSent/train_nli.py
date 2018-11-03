@@ -48,9 +48,17 @@ parser.add_argument("--n_enc_layers", type=int, default=1, help="encoder num lay
 parser.add_argument("--fc_dim", type=int, default=512, help="nhid of fc layers")
 parser.add_argument("--n_classes", type=int, default=3, help="entailment/neutral/contradiction")
 parser.add_argument("--pool_type", type=str, default='max', help="max or mean")
+
+# adversary parameters
 parser.add_argument("--use_adv",action='store_true',help="whether to use the adversary loss or not")
-parser.add_argument("--lambda_adv",type=float,default=0.01,help="coefficient of the adversarial loss")
+parser.add_argument("--lambda_adv",type=float,default=0.001,help="coefficient of the adversarial loss")
 parser.add_argument("--deeper_adv",action='store_true',help="deeper adversary")
+
+#adversary annealing parameters
+parser.add_argument("--annealing",action='store_true',help="anneal in adversary loss weight")
+parser.add_argument("--max_lambda_adv",type=float,default=0.01,help="anneal to this value maximum")
+parser.add_argument("--anneal_growth_rate",type=float,default=1.1,help="grow lambda_adv by this value every epoch. Must be >1")
+
 
 # gpu
 parser.add_argument("--gpu_id", type=int, default=-1, help="GPU ID")
@@ -187,7 +195,10 @@ def trainepoch(epoch):
         loss = loss_fn(output, tgt_batch)
         if params.use_adv:
             adversaryLoss = loss_fn(adversaryOutput,tgt_batch)
-            loss = loss + params.lambda_adv*adversaryLoss
+            currentLambda = params.lambda_adv
+            if params.annealing:
+                currentLambda = min(params.max_lambda_adv, currentLambda*(params.anneal_growth_rate**epoch) )
+            loss = loss + currentLambda*adversaryLoss
         all_costs.append(loss.data[0])
         words_count += (s1_batch.nelement() + s2_batch.nelement()) / params.word_emb_dim
 
