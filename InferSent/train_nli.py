@@ -57,6 +57,7 @@ parser.add_argument("--full_through_adversary",action='store_true',help="full_th
 
 #adversary annealing parameters
 parser.add_argument("--annealing",action='store_true',help="anneal in adversary loss weight")
+parser.add_argument("--addAnnealing",action='store_true',help="adding annealing")
 parser.add_argument("--max_lambda_adv",type=float,default=0.01,help="anneal to this value maximum")
 parser.add_argument("--anneal_growth_rate",type=float,default=1.1,help="grow lambda_adv by this value every epoch. Must be >1")
 
@@ -177,6 +178,7 @@ def trainepoch(epoch):
         and 'sgd' in params.optimizer else optimizer.param_groups[0]['lr']
     print('Learning rate : {0}'.format(optimizer.param_groups[0]['lr']))
 
+    if params.addAnnealing: numberOfIters = (len(s1)+0.0)/(params.batch_size+0.0)
     for stidx in range(0, len(s1), params.batch_size):
         # prepare batch
         s1_batch, s1_len = get_batch(s1[stidx:stidx + params.batch_size],
@@ -206,6 +208,8 @@ def trainepoch(epoch):
             currentLambda = params.lambda_adv
             if params.annealing:
                 currentLambda = min(params.max_lambda_adv, currentLambda*(params.anneal_growth_rate**epoch) )
+            if params.addAnnealing:
+                currentLambda = min(params.max_lambda_adv, currentLambda + (epoch*numberOfIters+stidx)*params.anneal_growth_rate)
             loss = loss + currentLambda*adversaryLoss
         all_costs.append(loss.data[0])
         words_count += (s1_batch.nelement() + s2_batch.nelement()) / params.word_emb_dim
@@ -236,11 +240,12 @@ def trainepoch(epoch):
         if len(all_costs) == 100:
             #import pdb;pdb.set_trace()
             if params.use_adv:
-                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f} ; adversary accuracy train: {5:.4f} '.format(
+                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f} ; lambda : {5:.4f} adversary accuracy train: {6:.4f} '.format(
                             stidx, round(np.mean(all_costs), 2),
                             int(len(all_costs) * params.batch_size / (time.time() - last_time)),
                             int(words_count * 1.0 / (time.time() - last_time)),
                             100.*(correct.item())/(stidx+k+0.0),
+                            currentLambda,
                             100.*(adverseCorrect.item())/(stidx+k+0.0) ))
             else:
                 logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f}'.format(
