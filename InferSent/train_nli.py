@@ -164,6 +164,7 @@ def trainepoch(epoch):
 
     last_time = time.time()
     correct = 0.
+    if params.use_adv: adverseCorrect = 0.
     # shuffle the data
     permutation = np.random.permutation(len(train['s1']))
 
@@ -192,7 +193,12 @@ def trainepoch(epoch):
         pred = output.data.max(1)[1]
         correct += pred.long().eq(tgt_batch.data.long()).cpu().sum()
         assert len(pred) == len(s1[stidx:stidx + params.batch_size])
-
+        
+        if params.use_adv:
+            adversePred = adversaryOutput.data.max(1)[1]
+            adverseCorrect += adversePred.long().eq(tgt_batch.data.long()).cpu().sum()
+            assert len(adversePred) == len(s1[stidx:stidx + params.batch_size])
+           
         # loss
         loss = loss_fn(output, tgt_batch)
         if params.use_adv:
@@ -229,7 +235,15 @@ def trainepoch(epoch):
 
         if len(all_costs) == 100:
             #import pdb;pdb.set_trace()
-            logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f}'.format(
+            if params.use_adv:
+                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f} ; adversary accuracy train: {5:.4f} '.format(
+                            stidx, round(np.mean(all_costs), 2),
+                            int(len(all_costs) * params.batch_size / (time.time() - last_time)),
+                            int(words_count * 1.0 / (time.time() - last_time)),
+                            100.*(correct.item())/(stidx+k+0.0),
+                            100.*(adverseCorrect.item())/(stidx+k+0.0) ))
+            else:
+                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f}'.format(
                             stidx, round(np.mean(all_costs), 2),
                             int(len(all_costs) * params.batch_size / (time.time() - last_time)),
                             int(words_count * 1.0 / (time.time() - last_time)),
