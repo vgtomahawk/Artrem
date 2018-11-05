@@ -760,6 +760,7 @@ class NLINet(nn.Module):
         self.use_adv = config['use_adv']
         self.deeper_adv = config['deeper_adv']
         self.full_through_adversary = config['full_through_adversary']
+        self.reversal_weight = config['reversal_weight']
         self.encoder = eval(self.encoder_type)(config)
         self.inputdim = 4*2*self.enc_lstm_dim
         self.inputdim = 4*self.inputdim if self.encoder_type in \
@@ -803,7 +804,7 @@ class NLINet(nn.Module):
         
         #print(u.size())
         if self.use_adv:
-            gradReversedV=grad_reverse(v)
+            gradReversedV=grad_reverse(v,lambd=self.reversal_weight)
             if self.full_through_adversary:
                 maskedU = u*0
                 adversaryFeatures = torch.cat((maskedU, gradReversedV, torch.abs(maskedU-gradReversedV), (maskedU)*gradReversedV), 1)

@@ -24,6 +24,7 @@ from models import NLINet
 parser = argparse.ArgumentParser(description='NLI training')
 # paths
 parser.add_argument("--nlipath", type=str, default='dataset/SNLI/', help="NLI data path (SNLI or MultiNLI)")
+parser.add_argument("--extNlipath",type=str,default='dataset/MultiNLI/', help="external NLI Path")
 parser.add_argument("--outputdir", type=str, default='savedir/', help="Output directory")
 parser.add_argument("--outputmodelname", type=str, default='model.pickle')
 parser.add_argument("--word_emb_path", type=str, default="dataset/GloVe/glove.840B.300d.txt", help="word embedding file path")
@@ -40,6 +41,9 @@ parser.add_argument("--decay", type=float, default=0.99, help="lr decay")
 parser.add_argument("--minlr", type=float, default=1e-5, help="minimum lr")
 parser.add_argument("--max_norm", type=float, default=5., help="max norm (grad clipping)")
 parser.add_argument("--no_early_stopping",action='store_true',help="don't cut the model training after two validation decreases")
+parser.add_argument("--evaluateOnly",action="store_true",help="just evaluate, don't train")
+parser.add_argument("--evalExt",action="store_true",help="just evaluate, don't train")
+
 
 # model
 parser.add_argument("--encoder_type", type=str, default='InferSent', help="see list of encoders")
@@ -54,6 +58,7 @@ parser.add_argument("--use_adv",action='store_true',help="whether to use the adv
 parser.add_argument("--lambda_adv",type=float,default=0.001,help="coefficient of the adversarial loss")
 parser.add_argument("--deeper_adv",action='store_true',help="deeper adversary")
 parser.add_argument("--full_through_adversary",action='store_true',help="full_through_adversary")
+parser.add_argument("--reversal_weight",type=float,default=1.0,help="reversal_weight")
 
 #adversary annealing parameters
 parser.add_argument("--annealing",action='store_true',help="anneal in adversary loss weight")
@@ -100,6 +105,15 @@ for split in ['s1', 's2']:
             [word for word in sent.split() if word in word_vec] +
             ['</s>'] for sent in eval(data_type)[split]])
 
+if params.evalExt:
+    _, _, extTest = get_nli(params.extNlipath)
+    for split in ['s1', 's2']:
+        for data_type in ['extTest']:
+            eval(data_type)[split] = np.array([['<s>'] +
+                [word for word in sent.split() if word in word_vec] +
+                ['</s>'] for sent in eval(data_type)[split]])
+
+
 
 """
 MODEL
@@ -121,6 +135,7 @@ config_nli_model = {
     'use_cuda'       :  False                  ,
     'use_adv'        :  params.use_adv         , 
     'deeper_adv'     :  params.deeper_adv      ,
+    'reversal_weight' : params.reversal_weight ,
     'full_through_adversary': params.full_through_adversary ,
 }
 
@@ -209,7 +224,7 @@ def trainepoch(epoch):
             if params.annealing:
                 currentLambda = min(params.max_lambda_adv, currentLambda*(params.anneal_growth_rate**epoch) )
             if params.addAnnealing:
-                currentLambda = min(params.max_lambda_adv, currentLambda + (epoch*numberOfIters+stidx)*params.anneal_growth_rate)
+                currentLambda = min(params.max_lambda_adv, currentLambda + (epoch*numberOfIters+stidx/params.batch_size)*params.anneal_growth_rate)
             loss = loss + currentLambda*adversaryLoss
         all_costs.append(loss.data[0])
         words_count += (s1_batch.nelement() + s2_batch.nelement()) / params.word_emb_dim
@@ -271,9 +286,12 @@ def evaluate(epoch, eval_type='valid', final_eval=False):
     if eval_type == 'valid':
         print('\nVALIDATION : Epoch {0}'.format(epoch))
 
-    s1 = valid['s1'] if eval_type == 'valid' else test['s1']
-    s2 = valid['s2'] if eval_type == 'valid' else test['s2']
-    target = valid['label'] if eval_type == 'valid' else test['label']
+    if eval_type == 'valid' or eval_type=='test':
+        s1 = valid['s1'] if eval_type == 'valid' else test['s1']
+        s2 = valid['s2'] if eval_type == 'valid' else test['s2']
+        target = valid['label'] if eval_type == 'valid' else test['label']
+    else:
+        s1,s2,target = extTest['s1'], extTest['s2'], extTest['label']
 
     for i in range(0, len(s1), params.batch_size):
         # prepare batch
@@ -328,10 +346,11 @@ epoch = 1
 # Load the best model so far.
 #nli_net.load_state_dict(torch.load(os.path.join(params.outputdir, params.outputmodelname)))
 
-while (not stop_training or params.no_early_stopping) and epoch <= params.n_epochs:
-    train_acc = trainepoch(epoch)
-    eval_acc = evaluate(epoch, 'valid')
-    epoch += 1
+if not params.evaluateOnly:
+    while (not stop_training or params.no_early_stopping) and epoch <= params.n_epochs:
+        train_acc = trainepoch(epoch)
+        eval_acc = evaluate(epoch, 'valid')
+        epoch += 1
 
 # Run best model on test set.
 nli_net.load_state_dict(torch.load(os.path.join(params.outputdir, params.outputmodelname)))
@@ -339,6 +358,9 @@ nli_net.load_state_dict(torch.load(os.path.join(params.outputdir, params.outputm
 print('\nTEST : Epoch {0}'.format(epoch))
 evaluate(1e6, 'valid', True)
 evaluate(0, 'test', True)
+
+if params.evalExt:
+    evaluate(0, 'extTest', True)
 
 # Save encoder instead of full model
 #torch.save(nli_net.encoder.state_dict(), os.path.join(params.outputdir, params.outputmodelname + '.encoder.pkl'))
