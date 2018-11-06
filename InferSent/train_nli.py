@@ -24,7 +24,7 @@ from models import NLINet
 parser = argparse.ArgumentParser(description='NLI training')
 # paths
 parser.add_argument("--nlipath", type=str, default='dataset/SNLI/', help="NLI data path (SNLI or MultiNLI)")
-parser.add_argument("--extNlipath",type=str,default='dataset/MultiNLI/', help="external NLI Path")
+parser.add_argument("--extNlipath",type=str,default='dataset/HardNLI/', help="external NLI Path")
 parser.add_argument("--outputdir", type=str, default='savedir/', help="Output directory")
 parser.add_argument("--outputmodelname", type=str, default='model.pickle')
 parser.add_argument("--word_emb_path", type=str, default="dataset/GloVe/glove.840B.300d.txt", help="word embedding file path")
