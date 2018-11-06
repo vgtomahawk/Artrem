@@ -77,7 +77,8 @@ parser.add_argument("--word_emb_dim", type=int, default=300, help="word embeddin
 params, _ = parser.parse_known_args()
 
 # set gpu device
-torch.cuda.set_device(params.gpu_id)
+if params.gpu_id >= 0:
+    torch.cuda.set_device(params.gpu_id)
 
 # print parameters passed, and all parameters
 print('\ntogrep : {0}\n'.format(sys.argv[1:]))
@@ -89,7 +90,8 @@ SEED
 """
 np.random.seed(params.seed)
 torch.manual_seed(params.seed)
-#torch.cuda.manual_seed(params.seed)
+if params.gpu_id >= 0:
+    torch.cuda.manual_seed(params.seed)
 
 """
 DATA
@@ -158,8 +160,9 @@ optim_fn, optim_params = get_optimizer(params.optimizer)
 optimizer = optim_fn(nli_net.parameters(), **optim_params)
 
 # cuda by default
-#nli_net.cuda()
-#loss_fn.cuda()
+if params.gpu_id >= 0:
+    nli_net.cuda()
+    loss_fn.cuda()
 
 
 """
@@ -202,10 +205,15 @@ def trainepoch(epoch):
                                      word_vec, params.word_emb_dim)
         s1_batch, s2_batch = Variable(s1_batch), Variable(s2_batch)
         tgt_batch = Variable(torch.LongTensor(target[stidx:stidx + params.batch_size]))
+        if params.gpu_id >= 0:
+            s1_batch = s1_batch.cuda()
+            s2_batch = s2_batch.cuda()
+            tgt_batch = tgt_batch.cuda()
+
         k = s1_batch.size(1)  # actual batch size
 
         # model forward
-        output,adversaryOutput = nli_net((s1_batch, s1_len), (s2_batch, s2_len))
+        output, adversaryOutput = nli_net((s1_batch, s1_len), (s2_batch, s2_len))
 
         pred = output.data.max(1)[1]
         correct += pred.long().eq(tgt_batch.data.long()).cpu().sum()
@@ -255,16 +263,16 @@ def trainepoch(epoch):
         if len(all_costs) == 100:
             #import pdb;pdb.set_trace()
             if params.use_adv:
-                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f} ; lambda : {5:.4f} adversary accuracy train: {6:.4f} '.format(
-                            stidx, round(np.mean(all_costs), 2),
+                logs.append('{0} ; loss {1:.2f} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f} ; lambda : {5:.4f} adversary accuracy train: {6:.4f} '.format(
+                            stidx, np.mean(all_costs),
                             int(len(all_costs) * params.batch_size / (time.time() - last_time)),
                             int(words_count * 1.0 / (time.time() - last_time)),
                             100.*(correct.item())/(stidx+k+0.0),
                             currentLambda,
                             100.*(adverseCorrect.item())/(stidx+k+0.0) ))
             else:
-                logs.append('{0} ; loss {1} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f}'.format(
-                            stidx, round(np.mean(all_costs), 2),
+                logs.append('{0} ; loss {1:.2f} ; sentence/s {2} ; words/s {3} ; accuracy train : {4:.4f}'.format(
+                            stidx, np.mean(all_costs),
                             int(len(all_costs) * params.batch_size / (time.time() - last_time)),
                             int(words_count * 1.0 / (time.time() - last_time)),
                             100.*(correct.item())/(stidx+k+0.0) ))
@@ -272,8 +280,8 @@ def trainepoch(epoch):
             last_time = time.time()
             words_count = 0
             all_costs = []
-    train_acc = round(100 * (correct+0.0)/(len(s1)+0.0), 5)
-    print('results : epoch {0} ; mean accuracy train : {1}'
+    train_acc = 100 * (correct+0.0)/(len(s1)+0.0)
+    print('results : epoch {0} ; mean accuracy train : {1:.5f}'
           .format(epoch, train_acc))
     return train_acc
 
@@ -299,6 +307,10 @@ def evaluate(epoch, eval_type='valid', final_eval=False):
         s2_batch, s2_len = get_batch(s2[i:i + params.batch_size], word_vec, params.word_emb_dim)
         s1_batch, s2_batch = Variable(s1_batch), Variable(s2_batch)
         tgt_batch = Variable(torch.LongTensor(target[i:i + params.batch_size])) #.cuda()
+        if params.gpu_id >= 0:
+            s1_batch = s1_batch.cuda()
+            s2_batch = s2_batch.cuda()
+            tgt_batch = tgt_batch.cuda()
 
         # model forward
         output, adversaryOutput = nli_net((s1_batch, s1_len), (s2_batch, s2_len))
