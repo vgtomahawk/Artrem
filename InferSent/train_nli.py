@@ -108,9 +108,9 @@ for split in ['s1', 's2']:
             ['</s>'] for sent in eval(data_type)[split]])
 
 if params.evalExt:
-    _, _, extTest = get_nli(params.extNlipath)
+    _, extValid, extTest = get_nli(params.extNlipath)
     for split in ['s1', 's2']:
-        for data_type in ['extTest']:
+        for data_type in ['extValid','extTest']:
             eval(data_type)[split] = np.array([['<s>'] +
                 [word for word in sent.split() if word in word_vec] +
                 ['</s>'] for sent in eval(data_type)[split]])
@@ -298,6 +298,8 @@ def evaluate(epoch, eval_type='valid', final_eval=False):
         s1 = valid['s1'] if eval_type == 'valid' else test['s1']
         s2 = valid['s2'] if eval_type == 'valid' else test['s2']
         target = valid['label'] if eval_type == 'valid' else test['label']
+    elif eval_type == 'extValid':
+        s1,s2,target = extValid['s1'], extValid['s2'], extValid['label']
     else:
         s1,s2,target = extTest['s1'], extTest['s2'], extTest['label']
 
@@ -372,6 +374,7 @@ evaluate(1e6, 'valid', True)
 evaluate(0, 'test', True)
 
 if params.evalExt:
+    evaluate(1e6, 'extValid', True)
     evaluate(0, 'extTest', True)
 
 # Save encoder instead of full model
