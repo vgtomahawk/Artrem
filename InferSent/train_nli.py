@@ -57,6 +57,7 @@ parser.add_argument("--pool_type", type=str, default='max', help="max or mean")
 parser.add_argument("--use_adv",action='store_true',help="whether to use the adversary loss or not")
 parser.add_argument("--lambda_adv",type=float,default=0.001,help="coefficient of the adversarial loss")
 parser.add_argument("--deeper_adv",action='store_true',help="deeper adversary")
+parser.add_argument("--separate_encoder",action="store_true",help="separate encoder")
 parser.add_argument("--full_through_adversary",action='store_true',help="full_through_adversary")
 parser.add_argument("--reversal_weight",type=float,default=1.0,help="reversal_weight")
 
@@ -139,6 +140,7 @@ config_nli_model = {
     'deeper_adv'     :  params.deeper_adv      ,
     'reversal_weight' : params.reversal_weight ,
     'full_through_adversary': params.full_through_adversary ,
+    'separate_encoder': params.separate_encoder,
 }
 
 # model

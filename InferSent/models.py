@@ -761,7 +761,10 @@ class NLINet(nn.Module):
         self.deeper_adv = config['deeper_adv']
         self.full_through_adversary = config['full_through_adversary']
         self.reversal_weight = config['reversal_weight']
+        self.separateEncoder = config['separate_encoder']
         self.encoder = eval(self.encoder_type)(config)
+        if self.separateEncoder:
+            self.hypEncoder = eval(self.encoder_type)(config)
         self.inputdim = 4*2*self.enc_lstm_dim
         self.inputdim = 4*self.inputdim if self.encoder_type in \
                         ["ConvNetEncoder", "InnerAttentionMILAEncoder"] else self.inputdim
@@ -800,7 +803,10 @@ class NLINet(nn.Module):
     def forward(self, s1, s2):
         # s1 : (s1, s1_len)
         u = self.encoder(s1)
-        v = self.encoder(s2)
+        if not self.separateEncoder:
+            v = self.hypEncoder(s2)
+        else:
+            v = self.encoder(s2)
         
         #print(u.size())
         if self.use_adv:
