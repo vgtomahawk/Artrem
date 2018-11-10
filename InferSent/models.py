@@ -803,7 +803,7 @@ class NLINet(nn.Module):
     def forward(self, s1, s2):
         # s1 : (s1, s1_len)
         u = self.encoder(s1)
-        if not self.separateEncoder:
+        if self.separateEncoder:
             v = self.hypEncoder(s2)
         else:
             v = self.encoder(s2)
